@@ -3,6 +3,7 @@
 	<name>ourscureuil</name>
 	<comment></comment>
 	<projects>
+		<project>ourscureuil-android</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
