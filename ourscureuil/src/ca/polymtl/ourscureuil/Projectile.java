@@ -22,7 +22,7 @@ public abstract class Projectile extends Node {
 	static int projectileId = 0;
 	protected static final Texture projectileTextureList = new Texture(Gdx.files.internal("data/vehicles_512.png"));
 	
-	private float mTimeLeft = 3;
+	private float mTimeLeft = 6;
 	
 	public abstract float GetProjectileMaxSpeed();
 	
@@ -33,7 +33,7 @@ public abstract class Projectile extends Node {
 	
 	public void SetMovement(Vector2 movement) {
 		float speedfactor = GetProjectileMaxSpeed(); 
-		this.action(MoveBy.$(movement.x*speedfactor,movement.y*speedfactor,mTimeLeft));
+		this.action(MoveBy.$(movement.x*speedfactor*3,-movement.y*speedfactor*2,mTimeLeft));
 	}
 
 }
