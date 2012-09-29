@@ -35,7 +35,7 @@ public class MyGdxGame implements ApplicationListener {
 		inputResponse.registerWidthHeight(w,h);
 		Gdx.input.setInputProcessor(new GestureDetector(inputResponse));
 		hud = new HUD(w,h,batch);
-		renderTree = new RenderTree(w,h,false,batch);
+		renderTree = new RenderTree(w,h,true,batch);
 		
 		inputResponse.registerRenderTree(renderTree);
 		

@@ -40,7 +40,7 @@ public class LevelBG extends Node {
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		//levelSprite.draw(batch);
-		batch.draw(levelTextureRegion,0.0f,0.0f);
+		batch.draw(levelTextureRegion,0.0f,0.0f,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 	}
 
 	@Override

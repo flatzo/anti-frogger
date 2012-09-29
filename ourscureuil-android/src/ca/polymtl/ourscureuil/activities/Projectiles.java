@@ -5,10 +5,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import ca.polymtl.ourscureuil.R;
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Projectiles extends ListActivity  {
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,25 +37,25 @@ public class Projectiles extends ListActivity  {
 		    Bitmap projectileBmp;
 		    
 		    projectileBmp = Bitmap.createBitmap(bMapScaled, 0, 0, 2*48, 48);
-		    adapter.addItem("Truck", projectileBmp);
+		    adapter.addItem("Truck","Slow, won't stop for any obstacle.", projectileBmp);
 		    projectileBmp = Bitmap.createBitmap(bMapScaled, 2*48, 0, 48, 48);
-		    adapter.addItem("Lotus rose", projectileBmp);
+		    adapter.addItem("Lotus rose","Fast, will be deviated from any interference.", projectileBmp);
 		    projectileBmp = Bitmap.createBitmap(bMapScaled, 3*48, 0, 48, 48);
-		    adapter.addItem("Barils", projectileBmp);
+		    adapter.addItem("Barrels","High explosive, touch it and enjoy.", projectileBmp);
 		    projectileBmp = Bitmap.createBitmap(bMapScaled, 0, 48, 48, 48);
-		    adapter.addItem("Bike", projectileBmp);
+		    adapter.addItem("Bike","Really just an handicap", projectileBmp);
 		    projectileBmp = Bitmap.createBitmap(bMapScaled, 48, 48, 48, 48);
-		    adapter.addItem("Nascar", projectileBmp);
+		    adapter.addItem("Nascar","Drift is in the air.", projectileBmp);
 		    projectileBmp = Bitmap.createBitmap(bMapScaled, 48*2, 48, 2*48, 48);
-		    adapter.addItem("Truck orange", projectileBmp);
+		    adapter.addItem("Orange truck","Slow, won't stop for any obstacle. If thrown too fast, will overturn.", projectileBmp);
 		    projectileBmp = Bitmap.createBitmap(bMapScaled, 0, 2*48, 48, 48);
-		    adapter.addItem("Mini van", projectileBmp);
+		    adapter.addItem("Mini van","Kids are in that truck and they like frogs ! Don't be sadistic with that one.", projectileBmp);
 		    projectileBmp = Bitmap.createBitmap(bMapScaled, 48, 2*48, 48, 48);
-		    adapter.addItem("Police", projectileBmp);
+		    adapter.addItem("Police","Getting close to a frog, cop will aim and shoot.", projectileBmp);
 		    projectileBmp = Bitmap.createBitmap(bMapScaled, 2*48, 2*48, 48, 48);
-		    adapter.addItem("Mini van mauve", projectileBmp);
+		    adapter.addItem("Mini van mauve","....", projectileBmp);
 		    projectileBmp = Bitmap.createBitmap(bMapScaled, 3*48, 2*48, 48, 48);
-		    adapter.addItem("Lotus verte", projectileBmp);
+		    adapter.addItem("Lotus verte","Fast, will be deviated from any interference. Mowing the gras will bring it back on the tarmac.", projectileBmp);
 		    
 		    
 		} catch (IOException e) {
@@ -106,7 +105,9 @@ public class Projectiles extends ListActivity  {
 	public class ProjectileItem {
 		String description;
 		Bitmap image;
-		ProjectileItem(String description, Bitmap image) {
+		String name;
+		ProjectileItem(String title, String description, Bitmap image) {
+			this.name = title;
 			this.description = description;
 			this.image = image;
 		}
@@ -122,8 +123,8 @@ public class Projectiles extends ListActivity  {
 			inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		}
 
-		public void addItem(String description, Bitmap image) {
-			data.add(new ProjectileItem(description,image));
+		public void addItem(String title, String description, Bitmap image) {
+			data.add(new ProjectileItem(title,description,image));
 			notifyDataSetChanged();
 		}
 
@@ -146,10 +147,12 @@ public class Projectiles extends ListActivity  {
 		public View getView(int position, View convertView, ViewGroup parent) {
 		 
 				View rowView = inflater.inflate(R.layout.projectile_adapter, parent, false);
-				TextView textView = (TextView) rowView.findViewById(R.id.projectile_adapter_description);
+				TextView description = (TextView) rowView.findViewById(R.id.projectile_adapter_description);
+				TextView name = (TextView) rowView.findViewById(R.id.projectile_adapter_name);
 				ImageView imageView = (ImageView) rowView.findViewById(R.id.projectile_adapter_sprite);
 				ProjectileItem item = data.get(position);
-				textView.setText(item.description);
+				name.setText(item.name);
+				description.setText(item.description);
 				imageView.setImageBitmap(item.image);
 		 
 				return rowView;

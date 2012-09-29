@@ -14,14 +14,29 @@
             android:label="@string/app_name"
             android:screenOrientation="landscape"
             android:configChanges="">
-
         </activity>
+        
+        <activity
+            android:name=".activities.Instructions"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            android:configChanges="">
+        </activity>
+        
+        <activity
+            android:name=".activities.Projectiles"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            android:configChanges="">
+        </activity>
+        
         <activity android:name=".activities.Menu" android:launchMode="standard">
                         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.GeneralInstructions"></activity>
     </application>
 
 </manifest>
