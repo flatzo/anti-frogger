@@ -28,8 +28,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.LibgdxToolkit;
 import com.sun.xml.internal.ws.api.message.Message;
 
 public class Scene {
-	private int w;
-	private int h;
 	private RenderTree renderTree;
 	private float timeToAddProjectile = 2.0f;
 	private float timeOfLife = 10.0f;
@@ -38,11 +36,11 @@ public class Scene {
 	private Boolean[] activeProjectiles = new Boolean[10];
 	
 	
-	public Scene(int w,int h, RenderTree rt) {
+	public Scene(float scenewidth,float sceneheight, RenderTree rt) {
 		
 		 java.util.Arrays.fill(activeProjectiles, false);
 		 renderTree = rt;
-		 setProjectilesWaypoints(w,h);
+		 setProjectilesWaypoints(scenewidth,sceneheight);
 	}
 	
 	public void draw()
@@ -56,20 +54,40 @@ public class Scene {
 		}
 	}
 	
-	private void setProjectilesWaypoints(float w, float h)
+	private void setProjectilesWaypoints(float scenewidth, float sceneheight)
 	{
 		waypointsProjectiles = new Vector2[8];
-		waypointsProjectiles[0] = new Vector2(w - 40,h - 96);
-		waypointsProjectiles[1] = new Vector2(w - 40,h - 144);
-		waypointsProjectiles[2] = new Vector2(w - 40,h - 192);
-		waypointsProjectiles[3] = new Vector2(w - 40,h - 240);
+		waypointsProjectiles[0] = new Vector2(scenewidth - 40,sceneheight - 96);
+		waypointsProjectiles[1] = new Vector2(scenewidth - 40,sceneheight - 144);
+		waypointsProjectiles[2] = new Vector2(scenewidth - 40,sceneheight - 192);
+		waypointsProjectiles[3] = new Vector2(scenewidth - 40,sceneheight - 240);
 		
 		waypointsProjectiles[4] = new Vector2(0, 48);
 		waypointsProjectiles[5] = new Vector2(0, 96);
         waypointsProjectiles[6] = new Vector2(0, 144);
         waypointsProjectiles[7] = new Vector2(0, 192);
+		
+		/*waypointsProjectiles = new Vector2[8];
+		waypointsProjectiles[0] = new Vector2(scenewidth - 40,sceneheight - 96);
+		waypointsProjectiles[1] = new Vector2(scenewidth - 40,sceneheight - 144);
+		waypointsProjectiles[2] = new Vector2(scenewidth - 40,sceneheight - 192);
+		waypointsProjectiles[3] = new Vector2(scenewidth - 40,sceneheight - 240);
+		
+		waypointsProjectiles[4] = new Vector2(-8, 48);
+		waypointsProjectiles[5] = new Vector2(-8, 96);
+        waypointsProjectiles[6] = new Vector2(-8, 144);
+        waypointsProjectiles[7] = new Vector2(-8, 192);*/
         
-        // add waypoints for counter-traffic?
+		/*waypointsProjectiles = new Vector2[8];
+		waypointsProjectiles[0] = new Vector2(((800.0f-48.0f)/800.0f)*scenewidth,((480.0f-96.0f)/480.0f)*sceneheight);
+		waypointsProjectiles[1] = new Vector2(((800.0f-48.0f)/800.0f)*scenewidth,((480.0f-144.0f)/480.0f)*sceneheight);
+		waypointsProjectiles[2] = new Vector2(((800.0f-48.0f)/800.0f)*scenewidth,((480.0f-192.0f)/480.0f)*sceneheight);
+		waypointsProjectiles[3] = new Vector2(((800.0f-48.0f)/800.0f)*scenewidth,((480.0f-240.0f)/480.0f)*sceneheight);
+		
+		waypointsProjectiles[4] = new Vector2(0.0f, (48.0f/480.0f)*sceneheight);
+		waypointsProjectiles[5] = new Vector2(0.0f, (96.0f/480.0f)*sceneheight);
+        waypointsProjectiles[6] = new Vector2(0.0f, (144.0f/480.0f)*sceneheight);
+        waypointsProjectiles[7] = new Vector2(0.0f, (192.0f/480.0f)*sceneheight);*/
 	}
 	
 	public Actor addProjectile(int idPos, ProjectileType projectileType) {

@@ -10,17 +10,17 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class HUD {
 	private Texture lifebarTexture;
 	private BitmapFont timer;
-	private SpriteBatch hudBatch;
-	private float w;
-	private float h;
+	private SpriteBatch batch;
+	private float deviceWidth;
+	private float deviceHeight;
 	private TextureRegion lifebarLeftBorder;
 	private TextureRegion lifebarRightBorder;
 	private TextureRegion lifebarPoint;
 
-	public HUD(float w,float h, SpriteBatch batch) {
-		this.w = w;
-		this.h = h;
-		hudBatch = batch;
+	public HUD(float dwidth,float dheight, SpriteBatch batch) {
+		this.deviceWidth = dwidth;
+		this.deviceHeight = dheight;
+		this.batch = batch;
 		lifebarTexture = new Texture(Gdx.files.internal("data/lifebar.png"));
 		lifebarTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		lifebarLeftBorder = new TextureRegion(lifebarTexture, 	0, 0, 32, 32);
@@ -34,16 +34,15 @@ public class HUD {
 	public void draw(int nCurrLife, int nTotLife, int nRemainingTimeSec) {
 		int seconds = nRemainingTimeSec % 60;
 		int minutes = nRemainingTimeSec / 60;
-		String time = (minutes < 10 ? "0" : "") + String.valueOf(minutes) + 
-				":"  + (seconds < 10 ? "0" : "") + String.valueOf(seconds);
+		String time = String.valueOf(minutes) + ":" + String.valueOf(seconds);
 		
-		hudBatch.begin();
-		hudBatch.draw(lifebarLeftBorder, 80, h-40);
-		hudBatch.draw(lifebarRightBorder, 80+1+(nTotLife-1)*(18+2), h-40);
+		batch.begin();
+		batch.draw(lifebarLeftBorder, 80, deviceHeight-40);
+		batch.draw(lifebarRightBorder, 80+1+(nTotLife-1)*(18+2), deviceHeight-40);
 		for(int i = 0; i < nCurrLife; ++i) {
-			hudBatch.draw(lifebarPoint, 80+1+i*(18+2), h-40);
+			batch.draw(lifebarPoint, 80+1+i*(18+2), deviceHeight-40);
 		}
-		timer.draw(hudBatch, time, w-150, h-10);
-		hudBatch.end();
+		timer.draw(batch, time, deviceWidth-150, deviceHeight-10);
+		batch.end();
 	}
 }

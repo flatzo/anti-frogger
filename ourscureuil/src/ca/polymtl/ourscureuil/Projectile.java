@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -21,7 +22,7 @@ public abstract class Projectile extends Node {
 	
 	static enum ProjectileType { TRUCK1, TRUCK2, FASTCAR1, FASTCAR2, FASTCAR3, MOTORCYCLE, VAN1, VAN2, COP, BARREL };
 	static int projectileId = 0;
-	protected static final Texture projectileTextureList = new Texture(Gdx.files.internal("data/vehicles_512.png"));
+	protected static Texture projectileTextureList;
 	
 	private float mTimeLeft = 6;
 	
@@ -29,6 +30,10 @@ public abstract class Projectile extends Node {
 	
 	public Projectile( Vector2 posStart ) {
 		super ( posStart, new String("projectile").concat( new Integer(projectileId).toString()) );
+		if(projectileTextureList == null) {
+			projectileTextureList = new Texture(Gdx.files.internal("data/vehicles_512.png"));
+			projectileTextureList.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		}
 		projectileId++;
 	}
 	

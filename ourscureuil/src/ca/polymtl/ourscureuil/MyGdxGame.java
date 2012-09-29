@@ -24,27 +24,23 @@ public class MyGdxGame implements ApplicationListener {
 	private SpriteBatch batch;
 	private SpriteBatch hudBatch;
 	private HUD hud;
-	private InputResponse inputResponse = new InputResponse();
+	private InputResponse inputResponse;
 	private Scene scene;
-	private float remainingTime;
-	
-	private final float defaultTimer = 75.0f;
 	
 	@Override
 	public void create() {		
-		remainingTime = defaultTimer;
-		float w = Gdx.graphics.getWidth();
-		float h = Gdx.graphics.getHeight();
+		float deviceWidth = Gdx.graphics.getWidth();
+		float deviceHeight = Gdx.graphics.getHeight();
 		batch = new SpriteBatch();
-		inputResponse.registerWidthHeight(w,h);
-		Gdx.input.setInputProcessor(new GestureDetector(inputResponse));
-		hud = new HUD(w,h,batch);
-		renderTree = new RenderTree(w,h,true,batch);
-		
+		hud = new HUD(800,480,batch);
+		renderTree = new RenderTree(800,480,true,batch);
+		inputResponse = new InputResponse();
 		inputResponse.registerRenderTree(renderTree);
-		
-		//Spawn les projectiles
-		scene = new Scene((int)w,(int)h,renderTree);
+		Gdx.input.setInputProcessor(new GestureDetector(inputResponse));
+				
+		//Spawn les objets pour le level 1
+		//scene = new Scene(deviceWidth,deviceHeight,renderTree);
+		scene = new Scene(800,480,renderTree);
 		renderTree.getCurrentStage().addActor(new LevelBG("data/level1v2_1024.png"));
 	}
 
@@ -59,11 +55,9 @@ public class MyGdxGame implements ApplicationListener {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		//batch.setProjectionMatrix(camera.combined);
-		float deltaTime = Gdx.app.getGraphics().getDeltaTime();
-		remainingTime -= deltaTime;
-		renderTree.getCurrentStage().act(deltaTime);
+		renderTree.getCurrentStage().act(Gdx.app.getGraphics().getDeltaTime());
 		renderTree.draw();	
-		hud.draw(5, 8, (int)remainingTime);
+		hud.draw(5, 8, 75);
 		
 		scene.draw();
 	}

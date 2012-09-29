@@ -25,8 +25,8 @@ public class RenderTree {
 	private int numberOfMonster = 0;
 	
 
-	public RenderTree(float w, float h, boolean stretch, SpriteBatch batch) {
-		mStage = new Stage(w,h,stretch,batch);
+	public RenderTree(float stagewidth, float stageheight, boolean stretch, SpriteBatch batch) {
+		mStage = new Stage(stagewidth,stageheight,stretch,batch);
 		
 	}
 	

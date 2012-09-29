@@ -30,8 +30,8 @@ public abstract class Node extends Actor {
 	}
 	
 	public void setPosition( float newX, float newY ) {
-		this.originX = newX;
-		this.originY = newY;
+		this.x = newX;
+		this.y = newY;
 	}
 
 
