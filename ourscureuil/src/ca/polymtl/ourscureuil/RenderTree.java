@@ -82,6 +82,24 @@ public class RenderTree {
 				Vector2 c1 = new Vector2(frog.x+ frog.width/2, frog.y + frog.height/2);
 				Vector2 c2 = new Vector2(projectile.x+ projectile.width/2, projectile.y + projectile.height/2);
 				
+				
+				
+//				System.out.println("projectile.x:" + Double.toString(projectile.x)
+//						+ ", projectile.y:" + Double.toString(projectile.y)
+//						+ ", projectile.width:" + Double.toString(projectile.width)
+//						+ ", projectile.height:" + Double.toString(projectile.height)
+//						+ ", projectile center:" + Double.toString(projectile.x+projectile.width/2) + ","
+//						+ Double.toString(projectile.y+projectile.height/2)
+//						);
+//				System.out.println("grenou.x:" + Double.toString(frog.x)
+//						+ ", grenou.y:" + Double.toString(frog.y)
+//						+ ", grenou.width:" + Double.toString(frog.width)
+//						+ ", grenou.height:" + Double.toString(frog.height)
+//						+ ", grenou center:" + Double.toString(frog.x+frog.width/2) + ","
+//						+ Double.toString(frog.y+frog.height/2)
+//						);
+				
+				
 				if(intersectionRoundRound(c1, r1, c2, r2))
 					this.getCurrentStage().removeActor(frog);
 				

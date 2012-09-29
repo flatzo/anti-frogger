@@ -39,8 +39,11 @@ public abstract class Projectile extends Node {
 	
 	public void SetMovement(Vector2 movement) {
 		float speedfactor = GetProjectileMaxSpeed(); 
-		this.action(MoveBy.$(movement.x*speedfactor*3,-movement.y*speedfactor*2,mTimeLeft));
-		float degsToRotate = (float) (MathUtils.radiansToDegrees*Math.tan((-movement.y*speedfactor*2)/(movement.x*speedfactor*3)));
+		
+		float resistanceToMovement = 0.7f;
+		
+		this.action(MoveBy.$(movement.x*speedfactor*3,-movement.y*speedfactor*resistanceToMovement,mTimeLeft));
+		float degsToRotate = (float) (MathUtils.radiansToDegrees*Math.tan((-movement.y*speedfactor*resistanceToMovement)/(movement.x*speedfactor*3)));
 		this.action(RotateTo.$(degsToRotate,0.1f));
 	}
 

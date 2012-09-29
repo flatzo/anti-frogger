@@ -16,12 +16,17 @@ import com.badlogic.gdx.scenes.scene2d.actions.RotateTo;
 import com.badlogic.gdx.scenes.scene2d.actions.Sequence;
 
 public class Frog extends Node {
-	public Frog(Vector2 posStart, String nameOfNode) {
-		super(posStart, nameOfNode);
-		// TODO Auto-generated constructor stub
-	}
+	
 	static final float HITBOX_WIDTH = 48.0f;
 	static final float HITBOX_HEIGHT = 48.0f;
+	
+	public Frog(Vector2 posStart, String nameOfNode) {
+		super(posStart, nameOfNode);
+		this.height = HITBOX_HEIGHT;
+		this.width  = HITBOX_WIDTH;
+		// TODO Auto-generated constructor stub
+	}
+	
 	protected static final Texture projectileTextureList = new Texture(Gdx.files.internal("data/vehicles_512.png"));
 	static protected TextureRegion texreg = new TextureRegion(projectileTextureList, 48, 144, 48, 48);	
 	
