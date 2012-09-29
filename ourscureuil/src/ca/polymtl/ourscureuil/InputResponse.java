@@ -12,9 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.MoveTo;
 public class InputResponse implements GestureListener {
 
 	Projectile mSelectedProjectile = null; //can be null
-	
-	float mHeight = 0;
-	float mWidth = 0;
 	RenderTree theRenderTree;
 	
 	InputResponse() {
@@ -24,16 +21,6 @@ public class InputResponse implements GestureListener {
 	void registerRenderTree(RenderTree renderTree) {
 		theRenderTree = renderTree;
 	}
-	
-	void registerWidthHeight(float w, float h) {
-		mWidth = w;
-		mHeight = h;
-	}
-	
-	//modifies mSelectedProjectile
-	//void findProjectileAtPosition(int x, int y ) {
-		
-	//}
 	
 	void selectProjectileAtPosition(int x, int y) {
 		if (theRenderTree == null) {
