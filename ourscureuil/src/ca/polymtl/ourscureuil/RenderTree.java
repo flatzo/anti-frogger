@@ -1,0 +1,80 @@
+package ca.polymtl.ourscureuil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Iterator;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+
+public class RenderTree {
+	ArrayList<Node> children = new ArrayList<Node>();
+	static Stage mStage;
+
+	private final int maximumNumberOfMonster = 30;
+	private int numberOfMonster = 0;
+
+	public RenderTree() {
+		mStage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),
+				false);
+		numberOfMonster = 0;
+	}
+
+	public void addProjectile(Vector2 direction) {
+		Projectile nouveauProjectile = new Projectile(direction, mStage);
+		children.add(nouveauProjectile);
+
+	}
+
+	public void draw() {
+
+		// this.instantiateMonsters();
+
+		this.drawChildren();
+
+		Actor mainChar = null;
+		if (mStage.findActor("mainChar") != null) {
+			mainChar = mStage.findActor("mainChar");
+			mStage.removeActor(mainChar);
+		}
+
+		mStage.draw();
+
+		if (mainChar != null) {
+			mStage.addActor(mainChar);
+		}
+
+	}
+
+	public Stage getStage() {
+		return mStage;
+	}
+
+	private void drawChildren() {
+		Iterator<Node> iter = children.iterator();
+		Node child = null;
+
+		while (iter.hasNext()) {
+			child = iter.next();
+
+			if (child.update(mStage)) {
+				iter.remove();
+				mStage.removeActor(mStage.findActor(child.getName()));
+			}
+		}
+	}
+
+	/*
+	 * private void instantiateMonsters() { if(numberOfMonster <
+	 * maximumNumberOfMonster) { if(Math.random() < 0.1f) { Monster monster =
+	 * new Monster(RenderTree.mStage); this.children.add(monster);
+	 * RenderTree.mStage.addActor(monster.getImage()); this.numberOfMonster++; }
+	 * } }
+	 */
+}
