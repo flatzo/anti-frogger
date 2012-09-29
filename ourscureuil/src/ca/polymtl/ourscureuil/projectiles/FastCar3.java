@@ -38,8 +38,12 @@ public class FastCar3 extends Projectile {
 
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
-		batch.draw(texreg,this.x,this.y,this.originX,this.originY,this.width,this.height,this.scaleX,this.scaleY,this.rotation);
-		//batch.draw(texreg,0,0);
+		if(this.x<0.0f) {
+			batch.draw(texreg,this.x,this.y,this.originX,this.originY,this.width,this.height,-this.scaleX,this.scaleY,this.rotation);
+		}
+		else {
+			batch.draw(texreg,this.x,this.y,this.originX,this.originY,this.width,this.height,this.scaleX,this.scaleY,this.rotation);
+		}
 	}
 
 	@Override

@@ -62,10 +62,10 @@ public class Scene {
 		waypointsProjectiles[2] = new Vector2(scenewidth - 40,sceneheight - 192);
 		waypointsProjectiles[3] = new Vector2(scenewidth - 40,sceneheight - 240);
 		
-		waypointsProjectiles[4] = new Vector2(0, 48);
-		waypointsProjectiles[5] = new Vector2(0, 96);
-        waypointsProjectiles[6] = new Vector2(0, 144);
-        waypointsProjectiles[7] = new Vector2(0, 192);
+		waypointsProjectiles[4] = new Vector2(-8, 48);
+		waypointsProjectiles[5] = new Vector2(-8, 96);
+        waypointsProjectiles[6] = new Vector2(-8, 144);
+        waypointsProjectiles[7] = new Vector2(-8, 192);
 		
 		/*waypointsProjectiles = new Vector2[8];
 		waypointsProjectiles[0] = new Vector2(scenewidth - 40,sceneheight - 96);
