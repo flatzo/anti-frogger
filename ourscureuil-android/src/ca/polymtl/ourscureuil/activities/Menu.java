@@ -19,6 +19,15 @@ public class Menu extends Activity {
 			startActivity(intent);
 		}
     };
+    
+    private OnClickListener clickForInstructions = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			Intent intent = new Intent().setClass(getApplicationContext(),
+                    Instructions.class);
+			startActivity(intent);
+		}
+    };
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,6 +37,9 @@ public class Menu extends Activity {
         
         Button btnPlay = (Button) this.findViewById(R.id.btn_play);
         btnPlay.setOnClickListener(clickToPlay);
+        
+        Button btnInstructions = (Button) this.findViewById(R.id.btn_instructions);
+        btnInstructions.setOnClickListener(clickForInstructions);
     }
     @Override
     protected void onStart() {

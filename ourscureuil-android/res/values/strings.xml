@@ -2,4 +2,9 @@
 <resources>
     <string name="app_name">Anti-Frogger</string>
     <string name="play_game">Play game !</string>
+    <string name="title_controls">Controls</string>
+    <string name="text_controls">Swipe cars from left and right sides of the screen.</string>
+    <string name="title_goal">Goal</string>
+    <string name="text_goal">Aim toward the frogs in order to prevent them from reaching the other side of the road.</string>
+    <string name="btn_instructions">See Instructions</string>
 </resources>
