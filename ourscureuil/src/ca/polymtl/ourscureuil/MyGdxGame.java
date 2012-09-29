@@ -34,8 +34,6 @@ public class MyGdxGame implements ApplicationListener {
 		batch = new SpriteBatch();
 		inputResponse.registerWidthHeight(w,h);
 		Gdx.input.setInputProcessor(new GestureDetector(inputResponse));
-		//this.camera = new OrthographicCamera(h, w);
-        //this.camera.position.set(w/2, h/2, 0f);
 		hud = new HUD(w,h,batch);
 		renderTree = new RenderTree(w,h,false,batch);
 		

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Iterator;
 
 import ca.polymtl.ourscureuil.Projectile.ProjectileType;
-import ca.polymtl.ourscureuil.projectiles.Truck1;
+import ca.polymtl.ourscureuil.projectiles.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -49,35 +49,44 @@ public class RenderTree {
 	public void addProjectile(int idPos, ProjectileType projectileType) {
 		switch(projectileType) {
 			case TRUCK1:
-				Truck1 newProj = new Truck1(waypointsProjectiles[idPos-1]);
-				mStage.addActor(newProj);
+				Truck1 newTruck1 = new Truck1(waypointsProjectiles[idPos-1]);
+				mStage.addActor(newTruck1);
 				break;
 			case TRUCK2:
-				
+				Truck2 newTruck2 = new Truck2(waypointsProjectiles[idPos-1]);
+				mStage.addActor(newTruck2);
 				break;
 			case FASTCAR1:
-				
+				FastCar1 newFastCar1 = new FastCar1(waypointsProjectiles[idPos-1]);
+				mStage.addActor(newFastCar1);
 				break;
 			case FASTCAR2:
-				
+				FastCar2 newFastCar2 = new FastCar2(waypointsProjectiles[idPos-1]);
+				mStage.addActor(newFastCar2);
 				break;
 			case FASTCAR3:
-				
+				FastCar3 newFastCar3 = new FastCar3(waypointsProjectiles[idPos-1]);
+				mStage.addActor(newFastCar3);
 				break;
 			case MOTORCYCLE:
-				
+				Motorcycle1 newMotorcycle1 = new Motorcycle1(waypointsProjectiles[idPos-1]);
+				mStage.addActor(newMotorcycle1);
 				break;
 			case VAN1:
-				
+				Van1 newVan1 = new Van1(waypointsProjectiles[idPos-1]);
+				mStage.addActor(newVan1);
 				break;
 			case VAN2:
-				
+				Van2 newVan2 = new Van2(waypointsProjectiles[idPos-1]);
+				mStage.addActor(newVan2);
 				break;
 			case COP:
-				
+				Cop1 newCop1 = new Cop1(waypointsProjectiles[idPos-1]);
+				mStage.addActor(newCop1);
 				break;
 			case BARREL:
-				
+				Barrel1 newBarrel1 = new Barrel1(waypointsProjectiles[idPos-1]);
+				mStage.addActor(newBarrel1);
 				break;
 			default:
 			break;	
