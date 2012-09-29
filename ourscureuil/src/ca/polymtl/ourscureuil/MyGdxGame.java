@@ -1,5 +1,7 @@
 package ca.polymtl.ourscureuil;
 
+import ca.polymtl.ourscureuil.*;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -10,6 +12,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.input.GestureDetector;
+
 
 public class MyGdxGame implements ApplicationListener {
 	private OrthographicCamera camera;
@@ -18,6 +22,9 @@ public class MyGdxGame implements ApplicationListener {
 	private Texture texture;
 	private Sprite sprite;
 	private HUD hud;
+	
+	private MyInteger time = new MyInteger(0);
+	private MyGestureListener gestureListener = new MyGestureListener(time);
 	
 	@Override
 	public void create() {		
@@ -38,6 +45,9 @@ public class MyGdxGame implements ApplicationListener {
 		sprite.setSize(1.0f, 1.0f * sprite.getHeight() / sprite.getWidth());
 		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
 		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
+		
+		Gdx.input.setInputProcessor(new GestureDetector(gestureListener));
+		
 	}
 
 	@Override
@@ -56,7 +66,7 @@ public class MyGdxGame implements ApplicationListener {
 			sprite.draw(batch);
 		batch.end();
 		
-		hud.draw(0, 75);
+		hud.draw(0, time.getI());
 		
 		
 	}

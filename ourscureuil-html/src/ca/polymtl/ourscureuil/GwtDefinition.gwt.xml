@@ -2,6 +2,5 @@
 <module>
     <entry-point class="ca.polymtl.ourscureuil.client.GwtLauncher"/>
     <set-configuration-property name="gdx.assetpath" value="../ourscureuil-android/assets"/>
-    <inherits name="MyGdxGame"/>
     <inherits name="com.badlogic.gdx.backends.gdx_backends_gwt"/>
 </module>
