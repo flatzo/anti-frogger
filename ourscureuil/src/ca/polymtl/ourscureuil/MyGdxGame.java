@@ -25,6 +25,7 @@ public class MyGdxGame implements ApplicationListener {
 	private SpriteBatch hudBatch;
 	private HUD hud;
 	private InputResponse inputResponse = new InputResponse();
+	private Scene scene;
 	
 	@Override
 	public void create() {		
@@ -41,9 +42,10 @@ public class MyGdxGame implements ApplicationListener {
 		inputResponse.registerRenderTree(renderTree);
 		
 		//Spawn les projectiles
+		scene = new Scene((int)w,(int)h,renderTree);
 		renderTree.getCurrentStage().addActor(new LevelBG("data/level1v2_1024.png"));
-		SpawnProjectiles();
 			
+		
 	}
 
 	@Override
@@ -61,6 +63,7 @@ public class MyGdxGame implements ApplicationListener {
 		renderTree.draw();	
 		hud.draw(5, 8, 75);
 		
+		scene.draw();
 	}
 
 	@Override
@@ -77,18 +80,6 @@ public class MyGdxGame implements ApplicationListener {
 	public void resume() {
 	}
 	
-	private void SpawnProjectiles()
-	{
-		//Devrait etre dans l'init de la classe game
-		renderTree.addProjectile(1,ProjectileType.COP);
-		renderTree.addProjectile(2,ProjectileType.FASTCAR1);
-		renderTree.addProjectile(3,ProjectileType.FASTCAR2);
-		renderTree.addProjectile(4,ProjectileType.FASTCAR3);
-
-		renderTree.addProjectile(5,ProjectileType.TRUCK1);
-		renderTree.addProjectile(6,ProjectileType.TRUCK2);
-		renderTree.addProjectile(7,ProjectileType.MOTORCYCLE);
-		renderTree.addProjectile(8,ProjectileType.VAN1);
-	}
+	
 	
 }

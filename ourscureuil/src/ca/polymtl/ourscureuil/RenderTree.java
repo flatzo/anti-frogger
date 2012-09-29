@@ -107,7 +107,11 @@ public class RenderTree {
 	public Stage getCurrentStage() {
 		return mStage;
 	}
-
+	
+	public Vector2[] getWayPoints()
+	{
+		return waypointsProjectiles;
+	}
 	/*
 	 * private void instantiateMonsters() { if(numberOfMonster <
 	 * maximumNumberOfMonster) { if(Math.random() < 0.1f) { Monster monster =
