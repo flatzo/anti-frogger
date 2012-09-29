@@ -54,8 +54,16 @@ public class MyGdxGame implements ApplicationListener {
 		//Create the render tree
 		renderTree = new RenderTree();
 		
-		renderTree.addProjectile(new Vector2(w/2,h/2));
+		//Temporaire je vais faire des genres Waypoints avec du aleatoires et du flickering
+		renderTree.addProjectile(new Vector2(w - 40,h - 96));
+		renderTree.addProjectile(new Vector2(w - 40,h - 144));
+		renderTree.addProjectile(new Vector2(w - 40,h - 192));
+		renderTree.addProjectile(new Vector2(w - 40,h - 240));
 
+		renderTree.addProjectile(new Vector2(0, 48));
+		renderTree.addProjectile(new Vector2(0, 96));
+		renderTree.addProjectile(new Vector2(0, 144));
+		renderTree.addProjectile(new Vector2(0, 192));
 		
 	}
 
@@ -71,8 +79,6 @@ public class MyGdxGame implements ApplicationListener {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 	
-		//stage.draw();
-		renderTree.draw();
 		
 
 		batch.setProjectionMatrix(camera.combined);
@@ -85,7 +91,9 @@ public class MyGdxGame implements ApplicationListener {
 		//renderTree.draw
 		hud.draw(5, 8, 75);
 
-		
+		//stage.draw();
+		renderTree.draw();
+				
 		
 	}
 

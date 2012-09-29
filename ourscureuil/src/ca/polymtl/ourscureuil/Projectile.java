@@ -25,7 +25,6 @@ public class Projectile extends Node {
 				, stage 
 				);
 		
-		System.out.println("AJKDHASDKJHAKJDHKJASHDKJAHKJSDHAS");
 		mCurrentActor = stage.findActor(new String("projectile").concat( new Integer(projectileId).toString()));
 		projectileId++;
 		

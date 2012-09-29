@@ -35,7 +35,7 @@ public class RenderTree {
 	public void draw() {
 
 		// this.instantiateMonsters();
-
+		mStage.draw();
 		this.drawChildren();
 
 
@@ -51,11 +51,7 @@ public class RenderTree {
 
 		while (iter.hasNext()) {
 			child = iter.next();
-
-			if (child.update(mStage)) {
-				iter.remove();
-				mStage.removeActor(mStage.findActor(child.getName()));
-			}
+			child.update(mStage);
 		}
 	}
 
