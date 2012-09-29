@@ -14,7 +14,10 @@
             android:label="@string/app_name"
             android:screenOrientation="landscape"
             android:configChanges="">
-            <intent-filter>
+
+        </activity>
+        <activity android:name=".activities.Menu" android:launchMode="standard">
+                        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
