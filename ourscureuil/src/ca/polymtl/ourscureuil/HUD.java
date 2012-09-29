@@ -34,7 +34,8 @@ public class HUD {
 	public void draw(int nCurrLife, int nTotLife, int nRemainingTimeSec) {
 		int seconds = nRemainingTimeSec % 60;
 		int minutes = nRemainingTimeSec / 60;
-		String time = String.valueOf(minutes) + ":" + String.valueOf(seconds);
+		String time = (minutes < 10 ? "0" : "") + String.valueOf(minutes) + 
+				":"  + (seconds < 10 ? "0" : "") + String.valueOf(seconds);
 		
 		hudBatch.begin();
 		hudBatch.draw(lifebarLeftBorder, 80, h-40);
