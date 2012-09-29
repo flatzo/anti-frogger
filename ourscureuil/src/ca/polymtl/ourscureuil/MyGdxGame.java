@@ -26,12 +26,14 @@ public class MyGdxGame implements ApplicationListener {
 	private HUD hud;
 	private Texture projectileTexture;
 
-	private InputResponse inputResponse = new InputResponse(renderTree);
+	private InputResponse inputResponse = new InputResponse();
 	
 	@Override
 	public void create() {		
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
+		
+		inputResponse.registerWidthHeight(w,h);
 		
 		camera = new OrthographicCamera(1, h/w);
 		batch = new SpriteBatch();
@@ -53,6 +55,8 @@ public class MyGdxGame implements ApplicationListener {
 		
 		//Create the render tree
 		renderTree = new RenderTree();
+		
+		inputResponse.registerRenderTree(renderTree);
 		
 		//Temporaire je vais faire des genres Waypoints avec du aleatoires et du flickering
 		renderTree.addProjectile(new Vector2(w - 40,h - 96));
