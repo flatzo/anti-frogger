@@ -23,18 +23,11 @@ public class Frog extends Node {
 	static final float HITBOX_WIDTH = 48.0f;
 	static final float HITBOX_HEIGHT = 48.0f;
 	protected static final Texture projectileTextureList = new Texture(Gdx.files.internal("data/vehicles_512.png"));
-	static protected TextureRegion texreg = new TextureRegion(projectileTextureList, 144, 0, 48, 48);	
+	static protected TextureRegion texreg = new TextureRegion(projectileTextureList, 48, 144, 48, 48);	
 	
 	private float mTimeLeft = 6;
 	
 	public void SetMovement(Vector2 movement) {
-		float dX = this.x + movement.x;
-//		float dX = (float) Math.sin(this.x + movement.x);
-//		if(sinX > 0 && sinX < 0.5)
-//			dX = 0.0f;
-//		else if(dX < 0 && dX > -0.5) {
-//			dX = 0.0f;
-//		}
 		this.action(Repeat.$(Sequence.$(MoveBy.$(movement.x, movement.y, 1), MoveBy.$(-movement.x, movement.y, 1)),5));
 	}
 
