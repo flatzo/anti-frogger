@@ -41,19 +41,17 @@ public class MyGdxGame implements ApplicationListener {
 		batch = new SpriteBatch();
 		
 		hud = new HUD((int)w,(int)h);
+		
+		// background (level 1)
 		texture = new Texture(Gdx.files.internal("data/level1v2_1024.png"));
-		
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-
 		TextureRegion region = new TextureRegion(texture, 0, 0, 800, 480);
-		
 		sprite = new Sprite(region);
 		sprite.setSize(1.0f, 1.0f * sprite.getHeight() / sprite.getWidth());
 		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
 		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
 		
 		Gdx.input.setInputProcessor(new GestureDetector(inputResponse));
-		
 		
 		//Create the render tree
 		renderTree = new RenderTree();
