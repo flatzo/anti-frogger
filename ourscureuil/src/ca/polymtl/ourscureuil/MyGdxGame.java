@@ -26,7 +26,7 @@ public class MyGdxGame implements ApplicationListener {
 	private HUD hud;
 	private Texture projectileTexture;
 
-	private InputResponse inputResponse = new InputResponse();
+	private InputResponse inputResponse = new InputResponse(renderTree);
 	
 	@Override
 	public void create() {		

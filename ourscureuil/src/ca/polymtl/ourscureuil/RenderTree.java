@@ -40,6 +40,20 @@ public class RenderTree {
 
 
 	}
+	
+	public Projectile getProjectile(Actor actor) {
+		Iterator<Node> itr = children.iterator();
+		   
+	    //use hasNext() and next() methods of Iterator to iterate through the elements
+	    for ( int i = 0; i < children.size(); i++) {
+	    	System.out.println(actor.name + " " + children.get(i).getName());
+	    	if (actor.name == children.get(i).getName()) {
+	    		return (Projectile)children.get(i);
+	    	}
+	    }
+		
+	    return null;
+	}
 
 	public Stage getStage() {
 		return mStage;

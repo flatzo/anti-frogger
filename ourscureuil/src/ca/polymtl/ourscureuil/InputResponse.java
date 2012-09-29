@@ -4,6 +4,7 @@ import ca.polymtl.ourscureuil.*;
 
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 
 
@@ -13,18 +14,54 @@ public class InputResponse implements GestureListener {
 	//MyInteger mPositionX;
 	//MyInteger mPositionY;
 	
-	//RenderTree renderTree;
+	//int currentFingerPositionX = 0;
+	//int currentFingerPositionY = 0;
+	Projectile mSelectedProjectile = null; //can be null
 	
-	InputResponse(/*RenderTree theRenderTree*/) {
+	RenderTree theRenderTree;
+	
+	InputResponse(RenderTree renderTree) {
 		super();
 		//counter = time;
 		//mPositionX = positionX;
 		//mPositionY = positionY;
 		
-		//renderTree = theRenderTree;
+		theRenderTree = renderTree;
+		
+	}
+	
+	
+	//modifies mSelectedProjectile
+	//void findProjectileAtPosition(int x, int y ) {
+		
+	//}
+	
+	void selectProjectileAtPosition(int x, int y) {
+		Actor actorFound = theRenderTree.getStage().hit(x, y);
+		if (actorFound == null) {
+			mSelectedProjectile = null;
+			return;
+		}
+		if (!actorFound.name.startsWith("projectile")) {
+			//pas d/placable
+			mSelectedProjectile = null;
+			return;
+		}
+		
+		mSelectedProjectile = theRenderTree.getProjectile(actorFound); //avoir verifier que c<est un projectile avant
 		
 	}
 
+	void moveSelectedAtSpeed(float velocityX, float velocityY) {
+		Vector2 newDistancePerRender = new Vector2(velocityX,velocityY);
+		//adapt here , increase, decrease
+		
+		//mettre du clipping aux voies
+		
+		mSelectedProjectile.setDistancePerRender(newDistancePerRender);
+	}
+	
+	
 	
 	@Override
 	public boolean touchDown(int x, int y, int pointer) {
@@ -52,6 +89,7 @@ public class InputResponse implements GestureListener {
 		// TODO Auto-generated method stub
 		
 		//counter.incre();
+		moveSelectedAtSpeed(velocityX, velocityY);
 		
 		return false;
 	}
