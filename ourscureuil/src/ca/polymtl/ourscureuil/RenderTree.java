@@ -26,8 +26,8 @@ public class RenderTree {
 		numberOfMonster = 0;
 	}
 
-	public void addProjectile(Vector2 direction) {
-		Projectile nouveauProjectile = new Projectile(direction, mStage);
+	public void addProjectile(Vector2 posStart) {
+		Projectile nouveauProjectile = new Projectile(posStart,mStage);
 		children.add(nouveauProjectile);
 
 	}
@@ -38,17 +38,6 @@ public class RenderTree {
 
 		this.drawChildren();
 
-		Actor mainChar = null;
-		if (mStage.findActor("mainChar") != null) {
-			mainChar = mStage.findActor("mainChar");
-			mStage.removeActor(mainChar);
-		}
-
-		mStage.draw();
-
-		if (mainChar != null) {
-			mStage.addActor(mainChar);
-		}
 
 	}
 
