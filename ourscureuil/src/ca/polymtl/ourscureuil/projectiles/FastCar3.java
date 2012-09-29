@@ -28,7 +28,7 @@ public class FastCar3 extends Projectile {
 
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
-		batch.draw(texreg,this.originX+this.x,this.originY+this.y);
+		batch.draw(texreg,this.originX+this.x,this.originY+this.y,HITBOX_WIDTH/2,HITBOX_HEIGHT/2,HITBOX_WIDTH,HITBOX_HEIGHT,1.0f,1.0f,this.rotation);
 	}
 
 	@Override
