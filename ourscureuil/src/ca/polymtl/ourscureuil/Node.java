@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Scaling;
 
+
+
 public class Node {
 	// sprite
 
@@ -25,13 +27,19 @@ public class Node {
 	final int FRONT = 1;
 	
 	public Node(Vector3 position, String nameOfNode,  Texture texture , Vector2 distancePerRender, Stage stage) {
-		mImage = new Image(texture);
+		mImage = new Image(texture,Scaling.fill ,0, nameOfNode);
 		mDistancePerRender = distancePerRender; 
 		
 		mName = nameOfNode;
 		//relativePosition = position;
 		mImage.x= position.x;
 		mImage.y = position.y;
+		//mImage. = nameOfNode;
+		//Actor dd = new Actor(nameOfNode);
+		
+		//dd.
+		
+		//stage.addActor(dd);
 		
 		stage.addActor(mImage) ;
 

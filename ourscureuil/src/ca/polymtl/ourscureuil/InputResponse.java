@@ -54,6 +54,8 @@ public class InputResponse implements GestureListener {
 			mSelectedProjectile = null;
 			return;
 		}
+		
+		//Actor dd = new Actor("ddd");
 		System.out.println(actorFound.name);
 		System.out.println(actorFound.originX);
 		System.out.println(actorFound.originY);
@@ -65,14 +67,14 @@ public class InputResponse implements GestureListener {
 		//System.out.println(actorFound.touchDragged(x, y, pointer));
 		//System.out.println(actorFound.);
 		
-		//if (!actorFound.name.startsWith("projectile")) {
-		//	//pas d/placable
-		//	mSelectedProjectile = null;
-		//	System.out.println("no actor found with name projectile");
-		//	return;
-		//}
+		if (!actorFound.name.startsWith("projectile")) {
+			//pas d/placable
+			mSelectedProjectile = null;
+			System.out.println("no actor found with name projectile");
+			return;
+		}
 		
-		//mSelectedProjectile = theRenderTree.getProjectile(actorFound); //avoir verifier que c<est un projectile avant
+		mSelectedProjectile = theRenderTree.getProjectile(actorFound); //avoir verifier que c<est un projectile avant
 		mSelectedActor = actorFound;
 		
 	}
@@ -88,7 +90,8 @@ public class InputResponse implements GestureListener {
 			System.out.println("no projectile selected");
 		}
 		else {
-		//	mSelectedProjectile.setDistancePerRender(newDistancePerRender);
+			mSelectedProjectile.setDistancePerRender(newDistancePerRender);
+			System.out.println("distance per render set" + Float.toString(velocityX) +  " ; " + Float.toString(velocityY));
 		}
 		
 		if (mSelectedActor == null) {

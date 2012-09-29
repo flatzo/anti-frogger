@@ -55,6 +55,7 @@ public class RenderTree {
 	public void draw() {
 
 		// this.instantiateMonsters();
+		
 		mStage.draw();
 		this.drawChildren();
 
