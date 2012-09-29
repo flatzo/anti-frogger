@@ -55,14 +55,14 @@ public class HUD {
 		hudBatch.end();
 	}
 	
-	public void draw(int life, int remainingTime, int offset) {
+	public void draw(int life, int remainingTime) {
 		int seconds = remainingTime % 60;
 		int minutes = remainingTime / 60;
 		String time = String.valueOf(minutes) + ":" + String.valueOf(seconds);
 		
 		hudBatch.begin();
 			drawLifeBar(5);
-			timer.draw(hudBatch, time, w - 100-offset,h-10);
+			timer.draw(hudBatch, time, w - 100,h-10);
 		hudBatch.end();
 	}
 	

@@ -7,29 +7,30 @@ import com.badlogic.gdx.math.Vector2;
 
 
 
-public class MyGestureListener implements GestureListener {
+public class InputResponse implements GestureListener {
 
-	MyInteger counter;
-	MyInteger mPositionX;
-	MyInteger mPositionY;
+	//MyInteger counter;
+	//MyInteger mPositionX;
+	//MyInteger mPositionY;
 	
-	MyGestureListener(MyInteger time,MyInteger positionX, MyInteger positionY) {
+	//RenderTree renderTree;
+	
+	InputResponse(/*RenderTree theRenderTree*/) {
 		super();
-		counter = time;
-		mPositionX = positionX;
-		mPositionY = positionY;
+		//counter = time;
+		//mPositionX = positionX;
+		//mPositionY = positionY;
+		
+		//renderTree = theRenderTree;
+		
 	}
-	
-	void incre() {
-		counter.incre();
-	}
+
 	
 	@Override
 	public boolean touchDown(int x, int y, int pointer) {
-		// TODO Auto-generated method stub
-		//counter.incre();
-		mPositionX.setI(x);
-		mPositionY.setI(y);
+
+		//xa gauche
+		//y en haut
 		
 		return false;
 	}
@@ -37,35 +38,33 @@ public class MyGestureListener implements GestureListener {
 	@Override
 	public boolean tap(int x, int y, int count) {
 		// TODO Auto-generated method stub
-		//counter.incre();
 		return false;
 	}
 
 	@Override
 	public boolean longPress(int x, int y) {
 		// TODO Auto-generated method stub
-		//counter.incre();
 		return false;
 	}
 
 	@Override
 	public boolean fling(float velocityX, float velocityY) {
 		// TODO Auto-generated method stub
-		counter.incre();
+		
+		//counter.incre();
+		
 		return false;
 	}
 
 	@Override
 	public boolean pan(int x, int y, int deltaX, int deltaY) {
 		// TODO Auto-generated method stub
-		//counter.incre();
 		return false;
 	}
 
 	@Override
 	public boolean zoom(float originalDistance, float currentDistance) {
 		// TODO Auto-generated method stub
-		//counter.incre();
 		return false;
 	}
 
@@ -74,7 +73,6 @@ public class MyGestureListener implements GestureListener {
 			Vector2 initialSecondPointer, Vector2 firstPointer,
 			Vector2 secondPointer) {
 		// TODO Auto-generated method stub
-		//counter.incre();
 		return false;
 	}
 

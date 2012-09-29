@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class MyGdxGame implements ApplicationListener {
@@ -19,9 +20,8 @@ public class MyGdxGame implements ApplicationListener {
 	private Texture texture;
 	private Sprite sprite;
 	private HUD hud;
-	
-	private MyInteger time = new MyInteger(0);
-	private MyGestureListener gestureListener = new MyGestureListener(time,time,time);
+
+	private InputResponse inputResponse = new InputResponse();
 	
 	@Override
 	public void create() {		
@@ -43,7 +43,7 @@ public class MyGdxGame implements ApplicationListener {
 		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
 		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
 		
-		
+		Gdx.input.setInputProcessor(new GestureDetector(inputResponse));
 	}
 
 	@Override
@@ -62,7 +62,8 @@ public class MyGdxGame implements ApplicationListener {
 			sprite.draw(batch);
 		batch.end();
 		
-		hud.draw(0, time.getI(),0);
+		//renderTree.draw
+		hud.draw(0, 75);
 		
 		
 	}
