@@ -41,14 +41,28 @@ public class HUD {
 		timer.setColor(0.0f,0.0f,0.0f,1.0f);
 	}
 	
-	public void draw(int life, int remainingTime) {
+	public void printNumber(int value, int horizontalOffset, int verticalOffset) {
+		String toPrint = String.valueOf(value);
+		print(toPrint, horizontalOffset, verticalOffset);
+		
+	}
+	
+	public void print(String toPrint, int horizontalOffset, int verticalOffset) {
+		
+		hudBatch.begin();
+			drawLifeBar(5);
+			timer.draw(hudBatch, toPrint, w - 100+horizontalOffset,h-10+verticalOffset);
+		hudBatch.end();
+	}
+	
+	public void draw(int life, int remainingTime, int offset) {
 		int seconds = remainingTime % 60;
 		int minutes = remainingTime / 60;
 		String time = String.valueOf(minutes) + ":" + String.valueOf(seconds);
 		
 		hudBatch.begin();
 			drawLifeBar(5);
-			timer.draw(hudBatch, time, w - 100,h-10);
+			timer.draw(hudBatch, time, w - 100-offset,h-10);
 		hudBatch.end();
 	}
 	

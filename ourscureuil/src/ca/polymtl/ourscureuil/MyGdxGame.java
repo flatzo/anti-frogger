@@ -22,9 +22,16 @@ public class MyGdxGame implements ApplicationListener {
 	private Texture texture;
 	private Sprite sprite;
 	private HUD hud;
+	private HUD posx;
+	private HUD posy;
+	//private TheRenderTree renderTree; 
+	
 	
 	private MyInteger time = new MyInteger(0);
-	private MyGestureListener gestureListener = new MyGestureListener(time);
+	private MyInteger positionX = new MyInteger(0);
+	private MyInteger positionY = new MyInteger(0);
+	
+	private MyGestureListener gestureListener = new MyGestureListener(time, positionX, positionY);
 	
 	@Override
 	public void create() {		
@@ -35,6 +42,9 @@ public class MyGdxGame implements ApplicationListener {
 		batch = new SpriteBatch();
 		
 		hud = new HUD((int)w,(int)h);
+		posx = new HUD((int)w,(int)h);
+		posy = new HUD((int)w,(int)h);
+		
 		texture = new Texture(Gdx.files.internal("data/level1v2_1024.png"));
 		
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
@@ -56,6 +66,8 @@ public class MyGdxGame implements ApplicationListener {
 		texture.dispose();
 	}
 
+	
+	
 	@Override
 	public void render() {		
 		Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -66,7 +78,12 @@ public class MyGdxGame implements ApplicationListener {
 			sprite.draw(batch);
 		batch.end();
 		
-		hud.draw(0, time.getI());
+		
+		hud.draw(0, time.getI(), 0);
+		//posx.draw(0, time.getI(), 30);
+		//posy.draw(0, time.getI(), -30);
+		posx.printNumber(78, -30, 0);
+		posy.print("ert", 30, 0);
 		
 		
 	}
