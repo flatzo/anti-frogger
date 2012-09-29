@@ -98,7 +98,7 @@ public class InputResponse implements GestureListener {
 			System.out.println("no actor selected");
 		}
 		else {
-			MoveTo action = MoveTo.$((float)mWidth, (float) mHeight, (float)45);
+			MoveTo action = MoveTo.$((float)mWidth*5, (float) mHeight*5, (float)45*5);
 			mSelectedActor.action(action);
 		}
 	}

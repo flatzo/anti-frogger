@@ -89,7 +89,9 @@ public class MyGdxGame implements ApplicationListener {
 		//renderTree.draw
 		hud.draw(5, 8, 75);
 
-		//stage.draw();
+		
+		renderTree.getStage().act(Gdx.app.getGraphics().getDeltaTime());
+		//renderTree.getStage().draw(); //appeler dans la ligne renderTree.draw();
 		renderTree.draw();
 		
 
