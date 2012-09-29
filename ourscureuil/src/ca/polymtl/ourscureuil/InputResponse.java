@@ -2,6 +2,7 @@ package ca.polymtl.ourscureuil;
 
 import ca.polymtl.ourscureuil.*;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -26,7 +27,8 @@ public class InputResponse implements GestureListener {
 		if (theRenderTree == null) {
 			System.out.println("ddd");
 		}
-		Actor actorFound = theRenderTree.getCurrentStage().hit(x, y);
+		Actor actorFound = theRenderTree.getCurrentStage().hit(x*800/Gdx.graphics.getWidth(),
+																(Gdx.graphics.getHeight()-y)*480/Gdx.graphics.getHeight());
 		if (actorFound == null) {
 			System.out.println("no actor found with hit method");
 			mSelectedProjectile = null;

@@ -162,7 +162,7 @@ public class Scene {
 				activeProjectiles[randomInt] = true;
 				final int indexToDelete = randomInt;
 				
-				new java.util.Timer().schedule( 
+				/*new java.util.Timer().schedule( 
 				        new java.util.TimerTask() {
 				            @Override
 				            public void run() {
@@ -171,7 +171,7 @@ public class Scene {
 				            }
 				        }, 
 				        (long) (timeOfLife*1000) 
-				);
+				);*/
 			}
 			counter++;
 			randomInt = randomGenerator.nextInt(8);
