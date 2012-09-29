@@ -26,9 +26,12 @@ public class MyGdxGame implements ApplicationListener {
 	private HUD hud;
 	private InputResponse inputResponse;
 	private Scene scene;
+	private float remainingTime;
+	private final float defaultTimer = 75.0f;
 	
 	@Override
-	public void create() {		
+	public void create() {	
+		remainingTime = defaultTimer;
 		float deviceWidth = Gdx.graphics.getWidth();
 		float deviceHeight = Gdx.graphics.getHeight();
 		batch = new SpriteBatch();
@@ -55,11 +58,18 @@ public class MyGdxGame implements ApplicationListener {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		//batch.setProjectionMatrix(camera.combined);
-		renderTree.getCurrentStage().act(Gdx.app.getGraphics().getDeltaTime());
-		renderTree.draw();	
-		hud.draw(5, 8, 75);
+		float deltaTime = Gdx.app.getGraphics().getDeltaTime();
+		remainingTime -= deltaTime;
+		if(remainingTime >= 0.0f) {
+			renderTree.getCurrentStage().act(deltaTime);
+			renderTree.draw();	
+			hud.draw(5, 8, (int) remainingTime);
+			
+			scene.draw();
+		} else {
+			// AFFICHER UN GAME OVER
+		}
 		
-		scene.draw();
 	}
 
 	@Override
