@@ -18,37 +18,23 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 public class Barrel1 extends Projectile {
 	
 	static final float MAX_SPEED = 1.7f;
-	static final float HITBOX_WIDTH = 48.0f;
+	public static final float HITBOX_WIDTH = 48.0f;
 	static final float HITBOX_HEIGHT = 48.0f;
-	static protected TextureRegion texreg;	
+	static protected TextureRegion texreg = new TextureRegion(projectileTextureList, 144, 0, 48, 48);	
 	
 	public Barrel1( Vector2 posStart ) {
-		super ( posStart ); // sets X and Y
-		this.width = HITBOX_WIDTH;
-		this.height = HITBOX_HEIGHT;
-		this.originX = HITBOX_WIDTH/2;
-		this.originY = HITBOX_HEIGHT/2;
-		this.scaleX = 1.0f;
-		this.scaleY = 1.0f;
-		this.rotation = 0.0f;
-		if(texreg == null) {
-			texreg = new TextureRegion(projectileTextureList, 144, 0, 48, 48);
-		}
+		super ( posStart );
 	}
 
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
-		batch.draw(texreg,this.x,this.y,this.originX,this.originY,this.width,this.height,this.scaleX,this.scaleY,this.rotation);
-		//batch.draw(texreg,0,0);
+		batch.draw(texreg,this.originX+this.x,this.originY+this.y,HITBOX_WIDTH/2,HITBOX_HEIGHT/2,HITBOX_WIDTH,HITBOX_HEIGHT,1.0f,1.0f,this.rotation);
 	}
 
 	@Override
 	public Actor hit(float x, float y) {
-		if( x > 0 && x < this.width && y > 0 && y < this.height) {
-			return this;
-		}
 		float h_tot = Gdx.graphics.getHeight();
-		if(	x>=(this.x) && x<=(this.x+this.width) && (h_tot-y)>=(this.y) && (h_tot-y)<=(this.y+this.height)) {
+		if(	x>=(this.originX+this.x) && x<=(this.originX+this.x+HITBOX_WIDTH) && (h_tot-y)>=(this.originY+this.y) && (h_tot-y)<=(this.originY+this.y+HITBOX_HEIGHT)) {
 			return this;
 		}
 		return null;

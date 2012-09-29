@@ -1,5 +1,7 @@
 package ca.polymtl.ourscureuil;
 
+import java.util.ArrayList;
+
 import ca.polymtl.ourscureuil.Projectile.ProjectileType;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -56,6 +58,9 @@ public class MyGdxGame implements ApplicationListener {
 	public void render() {	
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		
+		
+		renderTree.reactCollisionFrogs(scene.frogs, scene.projectiles);
 		
 		//batch.setProjectionMatrix(camera.combined);
 		float deltaTime = Gdx.app.getGraphics().getDeltaTime();

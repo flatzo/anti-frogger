@@ -1,5 +1,6 @@
 package ca.polymtl.ourscureuil;
- 
+
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -28,6 +29,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.LibgdxToolkit;
 import com.sun.xml.internal.ws.api.message.Message;
 
 public class Scene {
+	private int w;
+	private int h;
 	private RenderTree renderTree;
 	private float timeToAddProjectile = 2.0f;
 	private float timeOfLife = 10.0f;
@@ -36,11 +39,15 @@ public class Scene {
 	private Boolean[] activeProjectiles = new Boolean[10];
 	
 	
-	public Scene(float scenewidth,float sceneheight, RenderTree rt) {
+	public ArrayList<Frog> frogs = new ArrayList<Frog>();
+	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	
+	
+	public Scene(int w,int h, RenderTree rt) {
 		
 		 java.util.Arrays.fill(activeProjectiles, false);
 		 renderTree = rt;
-		 setProjectilesWaypoints(scenewidth,sceneheight);
+		 setProjectilesWaypoints(w,h);
 	}
 	
 	public void draw()
@@ -55,40 +62,20 @@ public class Scene {
 		}
 	}
 	
-	private void setProjectilesWaypoints(float scenewidth, float sceneheight)
+	private void setProjectilesWaypoints(float w, float h)
 	{
 		waypointsProjectiles = new Vector2[8];
-		waypointsProjectiles[0] = new Vector2(scenewidth - 40,sceneheight - 96);
-		waypointsProjectiles[1] = new Vector2(scenewidth - 40,sceneheight - 144);
-		waypointsProjectiles[2] = new Vector2(scenewidth - 40,sceneheight - 192);
-		waypointsProjectiles[3] = new Vector2(scenewidth - 40,sceneheight - 240);
+		waypointsProjectiles[0] = new Vector2(w - 40,h - 96);
+		waypointsProjectiles[1] = new Vector2(w - 40,h - 144);
+		waypointsProjectiles[2] = new Vector2(w - 40,h - 192);
+		waypointsProjectiles[3] = new Vector2(w - 40,h - 240);
 		
-		waypointsProjectiles[4] = new Vector2(-8, 48);
-		waypointsProjectiles[5] = new Vector2(-8, 96);
-        waypointsProjectiles[6] = new Vector2(-8, 144);
-        waypointsProjectiles[7] = new Vector2(-8, 192);
-		
-		/*waypointsProjectiles = new Vector2[8];
-		waypointsProjectiles[0] = new Vector2(scenewidth - 40,sceneheight - 96);
-		waypointsProjectiles[1] = new Vector2(scenewidth - 40,sceneheight - 144);
-		waypointsProjectiles[2] = new Vector2(scenewidth - 40,sceneheight - 192);
-		waypointsProjectiles[3] = new Vector2(scenewidth - 40,sceneheight - 240);
-		
-		waypointsProjectiles[4] = new Vector2(-8, 48);
-		waypointsProjectiles[5] = new Vector2(-8, 96);
-        waypointsProjectiles[6] = new Vector2(-8, 144);
-        waypointsProjectiles[7] = new Vector2(-8, 192);*/
+		waypointsProjectiles[4] = new Vector2(0, 48);
+		waypointsProjectiles[5] = new Vector2(0, 96);
+        waypointsProjectiles[6] = new Vector2(0, 144);
+        waypointsProjectiles[7] = new Vector2(0, 192);
         
-		/*waypointsProjectiles = new Vector2[8];
-		waypointsProjectiles[0] = new Vector2(((800.0f-48.0f)/800.0f)*scenewidth,((480.0f-96.0f)/480.0f)*sceneheight);
-		waypointsProjectiles[1] = new Vector2(((800.0f-48.0f)/800.0f)*scenewidth,((480.0f-144.0f)/480.0f)*sceneheight);
-		waypointsProjectiles[2] = new Vector2(((800.0f-48.0f)/800.0f)*scenewidth,((480.0f-192.0f)/480.0f)*sceneheight);
-		waypointsProjectiles[3] = new Vector2(((800.0f-48.0f)/800.0f)*scenewidth,((480.0f-240.0f)/480.0f)*sceneheight);
-		
-		waypointsProjectiles[4] = new Vector2(0.0f, (48.0f/480.0f)*sceneheight);
-		waypointsProjectiles[5] = new Vector2(0.0f, (96.0f/480.0f)*sceneheight);
-        waypointsProjectiles[6] = new Vector2(0.0f, (144.0f/480.0f)*sceneheight);
-        waypointsProjectiles[7] = new Vector2(0.0f, (192.0f/480.0f)*sceneheight);*/
+        // add waypoints for counter-traffic?
 	}
 	
 	public Actor addProjectile(int idPos, ProjectileType projectileType) {
@@ -98,42 +85,52 @@ public class Scene {
 			case TRUCK1:
 				Truck1 newTruck1 = new Truck1(waypointsProjectiles[idPos]);
 				stage.addActor(newTruck1);
+				projectiles.add(newTruck1);
 				return newTruck1;
 			case TRUCK2:
 				Truck2 newTruck2 = new Truck2(waypointsProjectiles[idPos]);
 				stage.addActor(newTruck2);
+				projectiles.add(newTruck2);
 				return newTruck2;
 			case FASTCAR1:
 				FastCar1 newFastCar1 = new FastCar1(waypointsProjectiles[idPos]);
 				stage.addActor(newFastCar1);
+				projectiles.add(newFastCar1);
 				return newFastCar1;
 			case FASTCAR2:
 				FastCar2 newFastCar2 = new FastCar2(waypointsProjectiles[idPos]);
 				stage.addActor(newFastCar2);
+				projectiles.add(newFastCar2);
 				return newFastCar2;
 			case FASTCAR3:
 				FastCar3 newFastCar3 = new FastCar3(waypointsProjectiles[idPos]);
 				stage.addActor(newFastCar3);
+				projectiles.add(newFastCar3);
 				return newFastCar3;
 			case MOTORCYCLE:
 				Motorcycle1 newMotorcycle1 = new Motorcycle1(waypointsProjectiles[idPos]);
 				stage.addActor(newMotorcycle1);
+				projectiles.add(newMotorcycle1);
 				return newMotorcycle1;
 			case VAN1:
 				Van1 newVan1 = new Van1(waypointsProjectiles[idPos]);
 				stage.addActor(newVan1);
+				projectiles.add(newVan1);
 				return newVan1;
 			case VAN2:
 				Van2 newVan2 = new Van2(waypointsProjectiles[idPos]);
 				stage.addActor(newVan2);
+				projectiles.add(newVan2);
 				return newVan2;
 			case COP:
 				Cop1 newCop1 = new Cop1(waypointsProjectiles[idPos]);
 				stage.addActor(newCop1);
+				projectiles.add(newCop1);
 				return newCop1;
 			case BARREL:
 				Barrel1 newBarrel1 = new Barrel1(waypointsProjectiles[idPos]);
 				stage.addActor(newBarrel1);
+				projectiles.add(newBarrel1);
 				return newBarrel1;
 			default:
 			return null;
@@ -151,7 +148,19 @@ public class Scene {
 		
 		while( counter < 8 && !isActive)
 		{
-		
+			/*
+			//Rotate actor
+			if(randomInt > 4)
+			{
+				car.action(RotateBy.$(180f,0.0f));
+				
+				if((car.width-40)>0)
+					car.action(MoveBy.$((car.width-40),0.0f,0.0f));
+			}
+			if((car.width - 40) > 0)
+				car.action(MoveBy.$(-(car.width - 40),0.0f,0.0f));
+			*/
+			
 			Vector2 waypoint = waypointsProjectiles[randomInt];
 			
 			if(activeProjectiles[randomInt] == false)
@@ -181,7 +190,6 @@ public class Scene {
 		
 	}
 	
-	
 	private void spawnRandomFrog() {
 		float width = Gdx.graphics.getWidth();
 		Random randomGenerator = new Random();
@@ -192,6 +200,7 @@ public class Scene {
 			
 		final Frog frog = new Frog(new Vector2(xStart,10),"bob");
 		renderTree.getCurrentStage().addActor(frog);
+		frogs.add(frog);
 		frog.SetMovement(new Vector2(vX,vY));
 			
 	}

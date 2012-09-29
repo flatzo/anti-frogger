@@ -1,5 +1,7 @@
 package ca.polymtl.ourscureuil;
 
+
+import java.awt.geom.RoundRectangle2D.Float;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
@@ -53,4 +55,53 @@ public class RenderTree {
 	public Stage getCurrentStage() {
 		return mStage;
 	}
+	
+	
+	
+	public void reactCollisionFrogs(ArrayList<Frog> frogs, ArrayList<Projectile> projectiles)
+	{
+		for(int i=0; i< frogs.size(); i++)
+		{
+			for(int j=0; j< projectiles.size();j++)
+			{
+				Node frog = frogs.get(i);
+				Node projectile = projectiles.get(j);
+				float r1 = 0;
+				float r2 = 0;
+				
+				if(frog.width < frog.height)
+					r1 = frog.height/2;
+				else
+					r1 = frog.width/2;
+				
+				if(projectile.width < projectile.height)
+					r2 = projectile.height/2;
+				else
+					r2 = projectile.width/2;
+				
+				Vector2 c1 = new Vector2(frog.x+ frog.width/2, frog.y + frog.height/2);
+				Vector2 c2 = new Vector2(projectile.x+ projectile.width/2, projectile.y + projectile.height/2);
+				
+				if(intersectionRoundRound(c1, r1, c2, r2))
+					this.getCurrentStage().removeActor(frog);
+				
+				
+			}
+		}
+	}
+	
+	
+	public boolean intersectionRoundRound(Vector2 c1, float r1 , Vector2 c2,  float r2)
+	{
+
+	    final float a = r1 + r2;
+	    final float dx = c1.x - c2.x;
+	    final float dy = c1.y - c2.y;
+	    
+	    //Return true if collision
+	    return a * a > (dx * dx + dy * dy);
+
+	}
+	
+
 }
