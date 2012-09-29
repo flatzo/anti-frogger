@@ -23,78 +23,43 @@ public class MyGdxGame implements ApplicationListener {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private SpriteBatch hudBatch;
-	private Texture texture;
-	private Sprite sprite;
 	private HUD hud;
-	private Texture projectileTexture;
-
 	private InputResponse inputResponse = new InputResponse();
 	
 	@Override
 	public void create() {		
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
-		
-		inputResponse.registerWidthHeight(w,h);
-		
-		camera = new OrthographicCamera(1, h/w);
 		batch = new SpriteBatch();
-		
-		hud = new HUD((int)w,(int)h);
-		
-		// background (level 1)
-		texture = new Texture(Gdx.files.internal("data/level1v2_1024.png"));
-		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		TextureRegion region = new TextureRegion(texture, 0, 0, 800, 480);
-		sprite = new Sprite(region);
-		sprite.setSize(1.0f, 1.0f * sprite.getHeight() / sprite.getWidth());
-		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
-		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
-		
+		inputResponse.registerWidthHeight(w,h);
 		Gdx.input.setInputProcessor(new GestureDetector(inputResponse));
-		
-		//Create the render tree
-		renderTree = new RenderTree();
+		//this.camera = new OrthographicCamera(h, w);
+        //this.camera.position.set(w/2, h/2, 0f);
+		hud = new HUD(w,h,batch);
+		renderTree = new RenderTree(w,h,false,batch);
 		
 		inputResponse.registerRenderTree(renderTree);
 		
 		//Spawn les projectiles
+		renderTree.getCurrentStage().addActor(new LevelBG("data/level1v2_1024.png"));
 		SpawnProjectiles();
-		
-		
-		
+			
 	}
 
 	@Override
 	public void dispose() {
 		batch.dispose();
-		texture.dispose();
 	}
 
 	@Override
-	public void render() {		
+	public void render() {	
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
-	
-		
-
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-			sprite.draw(batch);
-		batch.end();
-		
-		
-		
-		//renderTree.draw
+		//batch.setProjectionMatrix(camera.combined);
+		renderTree.getCurrentStage().act(Gdx.app.getGraphics().getDeltaTime());
+		renderTree.draw();	
 		hud.draw(5, 8, 75);
-
-		
-		renderTree.getStage().act(Gdx.app.getGraphics().getDeltaTime());
-		//renderTree.getStage().draw(); //appeler dans la ligne renderTree.draw();
-		renderTree.draw();
-		
-
 		
 	}
 
@@ -116,14 +81,14 @@ public class MyGdxGame implements ApplicationListener {
 	{
 		//Devrait etre dans l'init de la classe game
 		renderTree.addProjectile(1,ProjectileType.COP);
-		renderTree.addProjectile(2,ProjectileType.TAXI);
-		renderTree.addProjectile(3,ProjectileType.TRUCK);
-		renderTree.addProjectile(4,ProjectileType.SPEEDCAR);
+		renderTree.addProjectile(2,ProjectileType.FASTCAR1);
+		renderTree.addProjectile(3,ProjectileType.FASTCAR2);
+		renderTree.addProjectile(4,ProjectileType.FASTCAR3);
 
-		renderTree.addProjectile(5,ProjectileType.SPEEDCAR);
-		renderTree.addProjectile(6,ProjectileType.SPEEDCAR);
-		renderTree.addProjectile(7,ProjectileType.SPEEDCAR);
-		renderTree.addProjectile(8,ProjectileType.SPEEDCAR);
+		renderTree.addProjectile(5,ProjectileType.TRUCK1);
+		renderTree.addProjectile(6,ProjectileType.TRUCK2);
+		renderTree.addProjectile(7,ProjectileType.MOTORCYCLE);
+		renderTree.addProjectile(8,ProjectileType.VAN1);
 	}
 	
 }

@@ -11,15 +11,16 @@ public class HUD {
 	private Texture lifebarTexture;
 	private BitmapFont timer;
 	private SpriteBatch hudBatch;
-	private int w,h;
+	private float w;
+	private float h;
 	private TextureRegion lifebarLeftBorder;
 	private TextureRegion lifebarRightBorder;
 	private TextureRegion lifebarPoint;
 
-	public HUD(int w,int h) {
+	public HUD(float w,float h, SpriteBatch batch) {
 		this.w = w;
 		this.h = h;
-		hudBatch = new SpriteBatch();
+		hudBatch = batch;
 		lifebarTexture = new Texture(Gdx.files.internal("data/lifebar.png"));
 		lifebarTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		lifebarLeftBorder = new TextureRegion(lifebarTexture, 	0, 0, 32, 32);
@@ -36,20 +37,12 @@ public class HUD {
 		String time = String.valueOf(minutes) + ":" + String.valueOf(seconds);
 		
 		hudBatch.begin();
-			drawLifeBar(nCurrLife,nTotLife);
-			drawTimer(time);
-		hudBatch.end();
-	}
-	
-	private void drawLifeBar(int nCurrLife, int nTotLife) {
 		hudBatch.draw(lifebarLeftBorder, 80, h-40);
 		hudBatch.draw(lifebarRightBorder, 80+1+(nTotLife-1)*(18+2), h-40);
 		for(int i = 0; i < nCurrLife; ++i) {
 			hudBatch.draw(lifebarPoint, 80+1+i*(18+2), h-40);
 		}
-	}
-	
-	private void drawTimer(String time) {
 		timer.draw(hudBatch, time, w-150, h-10);
+		hudBatch.end();
 	}
 }

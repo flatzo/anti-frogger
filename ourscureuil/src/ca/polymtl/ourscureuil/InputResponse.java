@@ -11,20 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.actions.MoveTo;
 
 public class InputResponse implements GestureListener {
 
-	//MyInteger counter;
-	//MyInteger mPositionX;
-	//MyInteger mPositionY;
-	
-	//int currentFingerPositionX = 0;
-	//int currentFingerPositionY = 0;
 	Projectile mSelectedProjectile = null; //can be null
-	Actor mSelectedActor = null;
+	
 	float mHeight = 0;
 	float mWidth = 0;
-	
 	RenderTree theRenderTree;
-	
-	
 	
 	InputResponse() {
 		super();
@@ -48,7 +39,7 @@ public class InputResponse implements GestureListener {
 		if (theRenderTree == null) {
 			System.out.println("ddd");
 		}
-		Actor actorFound = theRenderTree.getStage().hit(x, y);
+		Actor actorFound = theRenderTree.getCurrentStage().hit(x, y);
 		if (actorFound == null) {
 			System.out.println("no actor found with hit method");
 			mSelectedProjectile = null;
@@ -74,42 +65,31 @@ public class InputResponse implements GestureListener {
 			return;
 		}
 		
-		mSelectedProjectile = theRenderTree.getProjectile(actorFound); //avoir verifier que c<est un projectile avant
-		mSelectedActor = actorFound;
+		// si on arrive ici, alors on sait que l'actor choisit est un projectile
+		mSelectedProjectile = (Projectile)actorFound;
 		
 	}
 
 	void moveSelectedAtSpeed(float velocityX, float velocityY) {
 		Vector2 newDistancePerRender = new Vector2(velocityX,velocityY);
 		
-		
 		//adapt here , increase, decrease
 		
 		//mettre du clipping aux voies
-		if (mSelectedProjectile == null) {
+		/*if (mSelectedProjectile == null) {
 			System.out.println("no projectile selected");
 		}
 		else {
 			mSelectedProjectile.setDistancePerRender(newDistancePerRender);
 			System.out.println("distance per render set" + Float.toString(velocityX) +  " ; " + Float.toString(velocityY));
-		}
-		
-		if (mSelectedActor == null) {
-			System.out.println("no actor selected");
-		}
-		else {
-			MoveTo action = MoveTo.$((float)mWidth*5, (float) mHeight*5, (float)45*5);
-			mSelectedActor.action(action);
-		}
+		}*/
 	}
-	
-	
 	
 	@Override
 	public boolean touchDown(int x, int y, int pointer) {
 
-		//xa gauche
-		//y en haut
+		// origine: en haut a gauche
+		// note: les coords fournies ici sont donnees sur l'ecran de la device utilisee; il faut donc rescaler a 800x480
 		selectProjectileAtPosition(x, y);
 		return false;
 	}
@@ -149,9 +129,7 @@ public class InputResponse implements GestureListener {
 	}
 
 	@Override
-	public boolean pinch(Vector2 initialFirstPointer,
-			Vector2 initialSecondPointer, Vector2 firstPointer,
-			Vector2 secondPointer) {
+	public boolean pinch(Vector2 initialFirstPointer, Vector2 initialSecondPointer, Vector2 firstPointer, Vector2 secondPointer) {
 		// TODO Auto-generated method stub
 		return false;
 	}
