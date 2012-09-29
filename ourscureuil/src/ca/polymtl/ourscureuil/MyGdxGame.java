@@ -36,10 +36,10 @@ public class MyGdxGame implements ApplicationListener {
 		
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 
-		TextureRegion region = new TextureRegion(texture, 0, 0, 512, 275);
+		TextureRegion region = new TextureRegion(texture, 0, 0, 800, 480);
 		
 		sprite = new Sprite(region);
-		sprite.setSize(0.9f, 0.9f * sprite.getHeight() / sprite.getWidth());
+		sprite.setSize(1.0f, 1.0f * sprite.getHeight() / sprite.getWidth());
 		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
 		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
 		
@@ -63,7 +63,7 @@ public class MyGdxGame implements ApplicationListener {
 		batch.end();
 		
 		//renderTree.draw
-		hud.draw(0, 75);
+		hud.draw(5, 8, 75);
 		
 		
 	}

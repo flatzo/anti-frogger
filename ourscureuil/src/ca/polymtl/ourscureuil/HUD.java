@@ -12,85 +12,44 @@ public class HUD {
 	private BitmapFont timer;
 	private SpriteBatch hudBatch;
 	private int w,h;
-	private TextureRegion emptyLifebarLeft;
-	private TextureRegion emptyLifebarRight;
-	private TextureRegion emptyLifebarCenter;
-	private TextureRegion lifebarLeft;
-	private TextureRegion lifebarRight;
-	private TextureRegion lifebarCenter;
-	private final int maxLife = 5;
+	private TextureRegion lifebarLeftBorder;
+	private TextureRegion lifebarRightBorder;
+	private TextureRegion lifebarPoint;
 
 	public HUD(int w,int h) {
 		this.w = w;
 		this.h = h;
 		hudBatch = new SpriteBatch();
-		
 		lifebarTexture = new Texture(Gdx.files.internal("data/lifebar.png"));
 		lifebarTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		
-		emptyLifebarLeft = new TextureRegion(lifebarTexture, 	0, 0, 32, 32);
-		emptyLifebarCenter = new TextureRegion(lifebarTexture, 	32, 0, 32, 32);
-		emptyLifebarRight = new TextureRegion(lifebarTexture, 	64, 0, 32, 32);
-		
-		lifebarLeft = new TextureRegion(lifebarTexture, 	0, 32, 32, 32);
-		lifebarCenter = new TextureRegion(lifebarTexture, 	32, 32, 32, 32);
-		lifebarRight = new TextureRegion(lifebarTexture, 	64, 32, 32, 32);
-		
-		
+		lifebarLeftBorder = new TextureRegion(lifebarTexture, 	0, 0, 32, 32);
+		lifebarRightBorder = new TextureRegion(lifebarTexture, 	32, 0, 32, 32);
+		lifebarPoint = new TextureRegion(lifebarTexture, 	0, 32, 32, 32);
 		timer = new BitmapFont();
-		timer.setColor(0.0f,0.0f,0.0f,1.0f);
+		timer.setScale(2.0f, 2.0f);
+		timer.setColor(0.0f,1.0f,0.0f,1.0f);
 	}
 	
-	public void printNumber(int value, int horizontalOffset, int verticalOffset) {
-		String toPrint = String.valueOf(value);
-		print(toPrint, horizontalOffset, verticalOffset);
-		
-	}
-	
-	public void print(String toPrint, int horizontalOffset, int verticalOffset) {
-		
-		hudBatch.begin();
-			drawLifeBar(5);
-			timer.draw(hudBatch, toPrint, w - 100+horizontalOffset,h-10+verticalOffset);
-		hudBatch.end();
-	}
-	
-	public void draw(int life, int remainingTime) {
-		int seconds = remainingTime % 60;
-		int minutes = remainingTime / 60;
+	public void draw(int nCurrLife, int nTotLife, int nRemainingTimeSec) {
+		int seconds = nRemainingTimeSec % 60;
+		int minutes = nRemainingTimeSec / 60;
 		String time = String.valueOf(minutes) + ":" + String.valueOf(seconds);
 		
 		hudBatch.begin();
-			drawLifeBar(5);
-			timer.draw(hudBatch, time, w - 100,h-10);
+			drawLifeBar(nCurrLife,nTotLife);
+			drawTimer(time);
 		hudBatch.end();
 	}
 	
-	private void drawLifeBar(int life) {
-		for(int i = 0; i < maxLife; ++i) {
-			switch(i) {
-			case 0: // premier
-				if(life == 0) {
-					hudBatch.draw(emptyLifebarLeft, 	100, h-10-32);
-				} else {
-					hudBatch.draw(lifebarLeft, 			100, h-10-32);
-				}
-				break;
-			case maxLife-1:
-				if(life == maxLife) {
-					hudBatch.draw(lifebarRight, 		100 + i * 32, h-10-32);
-				} else {
-					hudBatch.draw(emptyLifebarRight, 	100 + i * 32, h-10-32);
-				}
-				break;
-			default:
-				if(life > i) {
-					hudBatch.draw(lifebarCenter, 		100 + i * 32, h-10-32);
-				} else {
-					hudBatch.draw(emptyLifebarCenter, 	100 + i * 32, h-10-32);
-				}
-				break;	
-			}
+	private void drawLifeBar(int nCurrLife, int nTotLife) {
+		hudBatch.draw(lifebarLeftBorder, 80, h-40);
+		hudBatch.draw(lifebarRightBorder, 80+1+(nTotLife-1)*(18+2), h-40);
+		for(int i = 0; i < nCurrLife; ++i) {
+			hudBatch.draw(lifebarPoint, 80+1+i*(18+2), h-40);
 		}
+	}
+	
+	private void drawTimer(String time) {
+		timer.draw(hudBatch, time, w-150, h-10);
 	}
 }
