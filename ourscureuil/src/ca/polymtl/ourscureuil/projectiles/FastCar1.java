@@ -40,4 +40,8 @@ public class FastCar1 extends Projectile {
 		return null;
 	}
 
+	@Override
+	public float GetProjectileMaxSpeed() {
+		return MAX_SPEED;
+	}
 }

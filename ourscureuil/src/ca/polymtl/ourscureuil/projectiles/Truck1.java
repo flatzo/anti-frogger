@@ -40,4 +40,8 @@ public class Truck1 extends Projectile {
 		return null;
 	}
 
+	@Override
+	public float GetProjectileMaxSpeed() {
+		return MAX_SPEED;
+	}
 }

@@ -33,7 +33,7 @@ public abstract class Projectile extends Node {
 	
 	public void SetMovement(Vector2 movement) {
 		float speedfactor = GetProjectileMaxSpeed(); 
-		this.action(MoveBy(movement.x*speedfactor,movement.y*speedfactor,mTimeLeft));
+		this.action(MoveBy.$(movement.x*speedfactor,movement.y*speedfactor,mTimeLeft));
 	}
 
 }
