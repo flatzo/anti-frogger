@@ -28,14 +28,14 @@ public class MyGdxGame implements ApplicationListener {
 		batch = new SpriteBatch();
 		
 		hud = new HUD((int)w,(int)h);
+		texture = new Texture(Gdx.files.internal("data/level1v2_1024.png"));
 		
-		texture = new Texture(Gdx.files.internal("data/loadingScreenOursCureuil.png"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 
-		TextureRegion region = new TextureRegion(texture, 0, 0, 512, 275);
+		TextureRegion region = new TextureRegion(texture, 0, 0, 800, 480);
 		
 		sprite = new Sprite(region);
-		sprite.setSize(0.9f, 0.9f * sprite.getHeight() / sprite.getWidth());
+		sprite.setSize(1.0f, 1.0f * sprite.getHeight() / sprite.getWidth());
 		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
 		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
 	}
