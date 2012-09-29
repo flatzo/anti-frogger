@@ -1,5 +1,7 @@
 package ca.polymtl.ourscureuil;
 
+import ca.polymtl.ourscureuil.Projectile.ProjectileType;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -58,16 +60,10 @@ public class MyGdxGame implements ApplicationListener {
 		
 		inputResponse.registerRenderTree(renderTree);
 		
-		//Temporaire je vais faire des genres Waypoints avec du aleatoires et du flickering
-		renderTree.addProjectile(new Vector2(w - 40,h - 96));
-		renderTree.addProjectile(new Vector2(w - 40,h - 144));
-		renderTree.addProjectile(new Vector2(w - 40,h - 192));
-		renderTree.addProjectile(new Vector2(w - 40,h - 240));
-
-		renderTree.addProjectile(new Vector2(0, 48));
-		renderTree.addProjectile(new Vector2(0, 96));
-		renderTree.addProjectile(new Vector2(0, 144));
-		renderTree.addProjectile(new Vector2(0, 192));
+		//Spawn les projectiles
+		SpawnProjectiles();
+		
+		
 		
 	}
 
@@ -97,7 +93,8 @@ public class MyGdxGame implements ApplicationListener {
 
 		//stage.draw();
 		renderTree.draw();
-				
+		
+
 		
 	}
 
@@ -114,4 +111,19 @@ public class MyGdxGame implements ApplicationListener {
 	@Override
 	public void resume() {
 	}
+	
+	private void SpawnProjectiles()
+	{
+		//Devrait etre dans l'init de la classe game
+		renderTree.addProjectile(1,ProjectileType.COP);
+		renderTree.addProjectile(2,ProjectileType.TAXI);
+		renderTree.addProjectile(3,ProjectileType.TRUCK);
+		renderTree.addProjectile(4,ProjectileType.SPEEDCAR);
+
+		renderTree.addProjectile(5,ProjectileType.SPEEDCAR);
+		renderTree.addProjectile(6,ProjectileType.SPEEDCAR);
+		renderTree.addProjectile(7,ProjectileType.SPEEDCAR);
+		renderTree.addProjectile(8,ProjectileType.SPEEDCAR);
+	}
+	
 }

@@ -3,6 +3,9 @@ package ca.polymtl.ourscureuil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
+
+import ca.polymtl.ourscureuil.Projectile.ProjectileType;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,15 +22,32 @@ public class RenderTree {
 
 	private final int maximumNumberOfMonster = 30;
 	private int numberOfMonster = 0;
+	private Vector2[] waypointsProjectiles;
 
 	public RenderTree() {
 		mStage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),
 				false);
 		numberOfMonster = 0;
+		setProjectilesWaypoints(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 	}
 
-	public void addProjectile(Vector2 posStart) {
-		Projectile nouveauProjectile = new Projectile(posStart,mStage);
+	
+	private void setProjectilesWaypoints(int w, int h)
+	{
+		waypointsProjectiles = new Vector2[8];
+		waypointsProjectiles[0] = new Vector2(w - 40,h - 96);
+		waypointsProjectiles[1] = new Vector2(w - 40,h - 144);
+		waypointsProjectiles[2] = new Vector2(w - 40,h - 192);
+		waypointsProjectiles[3] = new Vector2(w - 40,h - 240);
+		
+		waypointsProjectiles[4] = new Vector2(0, 48);
+		waypointsProjectiles[5] = new Vector2(0, 96);
+        waypointsProjectiles[6] = new Vector2(0, 144);
+        waypointsProjectiles[7] = new Vector2(0, 192);
+	}
+	
+	public void addProjectile(int idPos, ProjectileType projectileType) {
+		Projectile nouveauProjectile = new Projectile(waypointsProjectiles[idPos-1],projectileType,mStage);
 		children.add(nouveauProjectile);
 
 	}

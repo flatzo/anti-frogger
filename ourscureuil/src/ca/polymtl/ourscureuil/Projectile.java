@@ -1,26 +1,42 @@
 package ca.polymtl.ourscureuil;
 
+
+import java.util.ArrayList; 
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+
+
 public class Projectile extends Node {
+	
+	public enum ProjectileType { TRUCK, TAXI, MOTORCYCLE, COP, SPEEDCAR, VAN};
 	
 	static final float PROJECTILE_SPEED = 0.5f;
 	static int projectileId = 0;
-	final static Texture textureProjectile = new Texture(Gdx.files.internal("data/greenCar.png"));
+
+	static final Texture projectileList = new Texture(Gdx.files.internal("data/greenCar.png"));
+	//Separer la sheet en plusieurs projectilList
+	
+	
 	private float mTimeLeft = 3; 
 	private Actor mCurrentActor;
 	private Vector2 mCurrentDirection;
 	
-	Projectile (Vector2 posStart, Stage stage) {
+
+	
+	
+	Projectile (Vector2 posStart, ProjectileType projectileType, Stage stage) {
 		super ( new Vector3(posStart.x,posStart.y, 2)
 				, new String("projectile").concat( new Integer(projectileId).toString())
-				, textureProjectile
+				, projectileList
 				,  new Vector2(0,0)
 				, stage 
 				);
@@ -29,6 +45,7 @@ public class Projectile extends Node {
 		projectileId++;
 		
 	}
+	
 	
 	@Override
 	public boolean update (Stage stage) {
