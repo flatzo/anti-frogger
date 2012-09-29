@@ -20,7 +20,7 @@ public class Cop1 extends Projectile {
 	static final float MAX_SPEED = 1.7f;
 	static final float HITBOX_WIDTH = 48.0f;
 	static final float HITBOX_HEIGHT = 48.0f;
-	static protected TextureRegion trucktexture = new TextureRegion(projectileTextureList, 48, 96, 48, 48);	
+	static protected TextureRegion texreg = new TextureRegion(projectileTextureList, 48, 96, 48, 48);	
 	
 	public Cop1( Vector2 posStart ) {
 		super ( posStart );
@@ -28,13 +28,13 @@ public class Cop1 extends Projectile {
 
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
-		batch.draw(trucktexture,this.originX,this.originY);
+		batch.draw(texreg,this.originX+this.x,this.originY+this.y);
 	}
 
 	@Override
 	public Actor hit(float x, float y) {
 		float h_tot = Gdx.graphics.getHeight();
-		if(	x>=this.originX && x<=(this.originX+HITBOX_WIDTH) && (h_tot-y)>=this.originY && (h_tot-y)<=(this.originY+HITBOX_HEIGHT)) {
+		if(	x>=(this.originX+this.x) && x<=(this.originX+this.x+HITBOX_WIDTH) && (h_tot-y)>=(this.originY+this.y) && (h_tot-y)<=(this.originY+this.y+HITBOX_HEIGHT)) {
 			return this;
 		}
 		return null;

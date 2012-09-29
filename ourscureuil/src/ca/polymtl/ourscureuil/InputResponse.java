@@ -69,21 +69,6 @@ public class InputResponse implements GestureListener {
 		mSelectedProjectile = (Projectile)actorFound;
 		
 	}
-
-	void moveSelectedAtSpeed(float velocityX, float velocityY) {
-		Vector2 newDistancePerRender = new Vector2(velocityX,velocityY);
-		
-		//adapt here , increase, decrease
-		
-		//mettre du clipping aux voies
-		/*if (mSelectedProjectile == null) {
-			System.out.println("no projectile selected");
-		}
-		else {
-			mSelectedProjectile.setDistancePerRender(newDistancePerRender);
-			System.out.println("distance per render set" + Float.toString(velocityX) +  " ; " + Float.toString(velocityY));
-		}*/
-	}
 	
 	@Override
 	public boolean touchDown(int x, int y, int pointer) {
@@ -110,9 +95,11 @@ public class InputResponse implements GestureListener {
 	public boolean fling(float velocityX, float velocityY) {
 		// TODO Auto-generated method stub
 		
-		//counter.incre();
-		moveSelectedAtSpeed(velocityX, velocityY);
-		
+		if(mSelectedProjectile!=null) {
+			mSelectedProjectile.SetMovement(new Vector2(velocityX,velocityY));
+			System.out.printf("\nFLIIIIIIIIIIIIIIIIIIIIIING\n");
+			return true;
+		}
 		return false;
 	}
 

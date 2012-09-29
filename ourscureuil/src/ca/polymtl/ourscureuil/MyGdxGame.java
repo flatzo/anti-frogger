@@ -42,8 +42,6 @@ public class MyGdxGame implements ApplicationListener {
 		//Spawn les projectiles
 		scene = new Scene((int)w,(int)h,renderTree);
 		renderTree.getCurrentStage().addActor(new LevelBG("data/level1v2_1024.png"));
-			
-		
 	}
 
 	@Override
