@@ -30,6 +30,10 @@ public class MyGdxGame implements ApplicationListener {
 	
 	private LevelBG gameLevelBG;
 	private LevelBG gameOverBG;
+	private LevelBG victoryScreenBG;
+	
+	public enum GameState { PLAYING, GAME_OVER, VICTORY, NEW_GAME};
+	public static GameState gameState = GameState.PLAYING;
 	
 	
 	@Override
@@ -50,6 +54,7 @@ public class MyGdxGame implements ApplicationListener {
 		inputResponse.registerScene(scene);
 		gameLevelBG = new LevelBG("data/level1v2_1024.png");
 		gameOverBG = new LevelBG("data/gameOverBG_1024.png");
+		victoryScreenBG = new LevelBG("data/victoryScreen_1024.png");
 		//gameOverBG = new LevelBG("data/level1v2_1024.png");
 		renderTree.getCurrentStage().addActor(gameLevelBG);
 	}
@@ -71,27 +76,69 @@ public class MyGdxGame implements ApplicationListener {
 		float deltaTime = Gdx.app.getGraphics().getDeltaTime();
 		remainingTime -= deltaTime;
 		
-		 if(Score.getInstance().isGameOver()) {
-			 renderTree.getCurrentStage().act(deltaTime);
-			 renderTree.getCurrentStage().addActor(gameOverBG);
-			 renderTree.getCurrentStage().removeActor(gameLevelBG);
-			 hud.draw(0);
-			 
-			 //scene.draw();
-			 renderTree.draw();
-			 
-			 //swipe to continue?
-			 // Afficher game over  //thierry à la rescousse
-				//System.out.println("Game over");
-		 } else	if(remainingTime >= 0.0f) {
-			renderTree.getCurrentStage().act(deltaTime);
-			renderTree.draw();	
-			hud.draw((int) remainingTime);
+		
+		switch (gameState) {
+		case PLAYING: 
+			if(Score.getInstance().isGameOver()) {
+				 renderTree.getCurrentStage().act(deltaTime);
+				 renderTree.getCurrentStage().addActor(gameOverBG);
+				 renderTree.getCurrentStage().removeActor(gameLevelBG);
+				 hud.draw(0);
+				 
+				 //scene.draw();
+				 renderTree.draw();
+				 gameState = GameState.GAME_OVER;
+				 //swipe to continue?
+				 // Afficher game over  //thierry à la rescousse
+					//System.out.println("Game over");
+			 } else	if(remainingTime >= 0.0f) {
+				renderTree.getCurrentStage().act(deltaTime);
+				renderTree.draw();	
+				hud.draw((int) remainingTime);
+				
+				scene.draw();
+			} else {
+				// AFFICHER GAGNANT thierry a la rescousse
+				renderTree.getCurrentStage().act(deltaTime);
+			    renderTree.getCurrentStage().addActor(victoryScreenBG);
+				renderTree.getCurrentStage().removeActor(gameLevelBG);
+				hud.draw(0);
+				 
+				//scene.draw();
+				renderTree.draw();
+				gameState = GameState.VICTORY;
+				//swipe to continue?
+			}
+			break;
+		case GAME_OVER:
+			hud.draw(0);
+			renderTree.draw();
+			break;
+		case NEW_GAME:
+			remainingTime = Score.getInstance().getMaxTime();
+			renderTree = new RenderTree(800,480,true,batch);
+			inputResponse.registerRenderTree(renderTree);
+			Gdx.input.setInputProcessor(new GestureDetector(inputResponse));
 			
-			scene.draw();
-		} else {
-			// TODO AFFICHER GAGNANT
+			Score.getInstance().reset();
+			//Spawn les objets pour le level 1
+			//scene = new Scene(deviceWidth,deviceHeight,renderTree);
+			scene = new Scene(800,480,renderTree);
+			inputResponse.registerScene(scene);
+			//gameOverBG = new LevelBG("data/level1v2_1024.png");
+			renderTree.getCurrentStage().act(deltaTime);
+			renderTree.getCurrentStage().addActor(gameLevelBG);
+			renderTree.getCurrentStage().removeActor(gameOverBG);
+			gameState= GameState.PLAYING;
+			break;
+		case VICTORY:
+			hud.draw(0);
+			renderTree.draw();
+			break;
+		default:
+			gameState = GameState.PLAYING;
 		}
+		 
 		
 	}
 

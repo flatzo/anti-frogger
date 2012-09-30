@@ -89,9 +89,9 @@ public class Scene {
 	public Actor addProjectile(int idPos, ProjectileType projectileType) {
 		
 		Stage stage = renderTree.getCurrentStage();
-		ProjectileType debug = ProjectileType.BARREL;
-		switch(debug) {
-		//switch(projectileType) {
+		//ProjectileType debug = ProjectileType.BARREL;
+		//switch(debug) {
+		switch(projectileType) {
 			case TRUCK1:
 				Truck1 newTruck1 = new Truck1(waypointsProjectiles[idPos]);
 				stage.addActor(newTruck1);
@@ -221,7 +221,7 @@ public class Scene {
 	}
 	
 	public int getWidth() {
-		System.out.println("w:" + Integer.toString(this.mWidth));
+		//System.out.println("w:" + Integer.toString(this.mWidth));
 		return this.mWidth;
 	}
 }

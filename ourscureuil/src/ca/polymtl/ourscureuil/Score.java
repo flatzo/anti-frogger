@@ -16,9 +16,15 @@ public class Score {
 	private int maxTime;
 	
 	private Score() {
+		reset();
+	}
+	
+	public void reset() {
 		maxLife = 5;
 		remainingLife = 5;
-		maxTime = 75;
+		//maxTime = 75;
+		///win faster
+		maxTime = 5;
 		gameOver = false;
 	}
 	
@@ -36,8 +42,8 @@ public class Score {
 			gameOver = true;
 		
 		///die quickly
-		//remainingLife = 0;
-		//gameOver = true;
+		remainingLife = 0;
+		gameOver = true;
 	}
 	
 	public boolean isGameOver() {

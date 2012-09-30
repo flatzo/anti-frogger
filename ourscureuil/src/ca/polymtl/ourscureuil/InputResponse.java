@@ -1,6 +1,7 @@
 package ca.polymtl.ourscureuil;
 
 import ca.polymtl.ourscureuil.*;
+import ca.polymtl.ourscureuil.MyGdxGame.GameState;
 import ca.polymtl.ourscureuil.projectiles.Barrel1;
 
 import com.badlogic.gdx.Gdx;
@@ -16,6 +17,7 @@ public class InputResponse implements GestureListener {
 	Projectile mSelectedProjectile = null; //can be null
 	RenderTree theRenderTree;
 	Scene theScene;
+//	GameState theGameState = MyGdxGame.GameState.PLAYING;
 	
 	InputResponse() {
 		super();
@@ -27,6 +29,10 @@ public class InputResponse implements GestureListener {
 	void registerScene(Scene scene) {
 		theScene = scene;
 	}
+//	void registerState(MyGdxGame.GameState gameState) {
+//		
+//	}
+	
 	
 	void selectProjectileAtPosition(int x, int y) {
 		if (theRenderTree == null) {
@@ -105,13 +111,22 @@ public class InputResponse implements GestureListener {
 
 	@Override
 	public boolean fling(float velocityX, float velocityY) {
-		// TODO Auto-generated method stub
-		
-		if(mSelectedProjectile!=null) {
-			mSelectedProjectile.SetMovement(new Vector2(velocityX,velocityY));
-			System.out.printf("\nFLIIIIIIIIIIIIIIIIIIIIIING\n");
-			return true;
+		if (MyGdxGame.gameState == GameState.PLAYING) {
+			if(mSelectedProjectile!=null) {
+				mSelectedProjectile.SetMovement(new Vector2(velocityX,velocityY));
+				System.out.printf("\nFLIIIIIIIIIIIIIIIIIIIIIING\n");
+				return true;
+			}
 		}
+		else if (MyGdxGame.gameState == GameState.GAME_OVER) {
+			MyGdxGame.gameState = GameState.NEW_GAME;
+			System.out.println("new game");
+		}
+		else if (MyGdxGame.gameState == GameState.VICTORY) {
+			MyGdxGame.gameState = GameState.NEW_GAME;
+			System.out.println("new game");
+		}
+
 		return false;
 	}
 
