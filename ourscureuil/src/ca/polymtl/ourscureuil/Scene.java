@@ -129,6 +129,11 @@ public class Scene {
 				projectiles.add(newCop1);
 				return newCop1;
 			case BARREL:
+				System.out.println("idPos:" +idPos);
+				if (idPos >= 8) {
+					System.out.println("idPos random too high");
+				}
+				System.out.println("wpp" + waypointsProjectiles[idPos]);
 				Barrel1 newBarrel1 = new Barrel1(waypointsProjectiles[idPos]);
 				stage.addActor(newBarrel1);
 				projectiles.add(newBarrel1);

@@ -24,7 +24,7 @@ public abstract class Projectile extends Node {
 	static int projectileId = 0;
 	protected static Texture projectileTextureList;
 	
-	private float mTimeLeft = 6;
+	private float mTimeLeft = 6; //for moving
 	
 	public abstract float GetProjectileMaxSpeed();
 	

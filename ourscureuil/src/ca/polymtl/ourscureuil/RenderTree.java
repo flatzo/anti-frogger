@@ -60,12 +60,15 @@ public class RenderTree {
 	
 	public void reactCollisionFrogs(ArrayList<Frog> frogs, ArrayList<Projectile> projectiles, ArrayList<DeadFrog> deadFrogs)
 	{
-		for(int i=0; i< frogs.size(); i++)
+		int currentFrog=0;
+		while (currentFrog< frogs.size() )
 		{
-			for(int j=0; j< projectiles.size();j++)
+			int currentProjectile=0;
+			boolean collisionDetected = false;
+			while (currentProjectile< projectiles.size() && !collisionDetected)
 			{
-				Node frog = frogs.get(i);
-				Node projectile = projectiles.get(j);
+				Node frog = frogs.get(currentFrog);
+				Node projectile = projectiles.get(currentProjectile);
 				float r1 = 0;
 				float r2 = 0;
 				
@@ -82,33 +85,22 @@ public class RenderTree {
 				Vector2 c1 = new Vector2(frog.x+ frog.width/2, frog.y + frog.height/2);
 				Vector2 c2 = new Vector2(projectile.x+ projectile.width/2, projectile.y + projectile.height/2);
 				
-				
-				
-//				System.out.println("projectile.x:" + Double.toString(projectile.x)
-//						+ ", projectile.y:" + Double.toString(projectile.y)
-//						+ ", projectile.width:" + Double.toString(projectile.width)
-//						+ ", projectile.height:" + Double.toString(projectile.height)
-//						+ ", projectile center:" + Double.toString(projectile.x+projectile.width/2) + ","
-//						+ Double.toString(projectile.y+projectile.height/2)
-//						);
-//				System.out.println("grenou.x:" + Double.toString(frog.x)
-//						+ ", grenou.y:" + Double.toString(frog.y)
-//						+ ", grenou.width:" + Double.toString(frog.width)
-//						+ ", grenou.height:" + Double.toString(frog.height)
-//						+ ", grenou center:" + Double.toString(frog.x+frog.width/2) + ","
-//						+ Double.toString(frog.y+frog.height/2)
-//						);
-				
-				
 				if(intersectionRoundRound(c1, r1, c2, r2))
 				{
-					DeadFrog cadaver = new DeadFrog(new Vector2(frog.x, frog.y), "dead"+frog.name);
-					deadFrogs.add(cadaver);
-					this.getCurrentStage().addActor(cadaver);
-					this.getCurrentStage().removeActor(frog);
+					killFrog(frog, deadFrogs, frogs, currentFrog ); //i is the index of frogToKill in the frogs array
+					//i = 0; //so that if i was last
+					collisionDetected = true; // so that i is not used anymore, and reevaluated
+					currentFrog = 0; //frog was changed
 				}
+				currentProjectile++;
 				
-				
+			}
+			
+			if (!collisionDetected) {
+				currentFrog++;
+			}
+			else {
+				//size of frogs has diminished
 			}
 		}
 	}
@@ -126,5 +118,26 @@ public class RenderTree {
 
 	}
 	
+	private final float DURATION_OF_CADAVER_IN_SECONDS = 100f;
+	
+	private void killFrog(Node frogToKill, ArrayList<DeadFrog> deadFrogs, ArrayList<Frog> liveFrogs, int indexOfLifeFrog) {
+		final DeadFrog cadaver = new DeadFrog(new Vector2(frogToKill.x, frogToKill.y), "dead"+frogToKill.name);
+		deadFrogs.add(cadaver);
+		liveFrogs.remove(indexOfLifeFrog);
+		this.getCurrentStage().addActor(cadaver);
+		this.getCurrentStage().removeActor(frogToKill);
+		
+		//cadaver will disappear from the road
+		new java.util.Timer().schedule( 
+		        new java.util.TimerTask() {
+		            @Override
+		            public void run() {
+		                getCurrentStage().removeActor(cadaver);
+		            }
+		        }, 
+		        (long) (DURATION_OF_CADAVER_IN_SECONDS*1000) 
+		);
+	}
+
 
 }
