@@ -22,10 +22,11 @@ public class Score {
 	public void reset() {
 		maxLife = 5;
 		remainingLife = 5;
-		//maxTime = 75;
-		///win faster
-		maxTime = 5;
+		maxTime = 75;
 		gameOver = false;
+		///win faster
+		//maxTime = 5;
+		
 	}
 	
 	public void setLife(int count) {

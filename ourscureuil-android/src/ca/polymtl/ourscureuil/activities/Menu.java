@@ -4,6 +4,7 @@ import ca.polymtl.ourscureuil.MainActivity;
 import ca.polymtl.ourscureuil.R;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,6 +38,8 @@ public class Menu extends Activity {
 			//startActivity(intent);
 		}
     };
+    
+    public MediaPlayer mPlay;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,9 @@ public class Menu extends Activity {
         
         Button btnOptions = (Button) this.findViewById(R.id.btn_options);
         btnOptions.setOnClickListener(clickForOptions);
+
+        
+        
     }
     @Override
     protected void onStart() {

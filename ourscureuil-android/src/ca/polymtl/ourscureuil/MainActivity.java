@@ -1,5 +1,7 @@
 package ca.polymtl.ourscureuil;
 
+import android.content.res.Resources;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -14,7 +16,11 @@ public class MainActivity extends AndroidApplication {
         AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
         cfg.useGL20 = false;
         
-        
+        SoundManager.getInstance(); //creates the instance
+		SoundManager.initSounds(this);
+		
+		
+		
         initialize(new MyGdxGame(), cfg);
     }
     

@@ -189,6 +189,8 @@ public class RenderTree {
 		        }, 
 		        (long) (DURATION_OF_CADAVER_IN_SECONDS*1000) 
 		);
+		MyGdxGame.squishSFX.play();
+		
 	}
 
 	private void crashCars(Node firstProjectile, Node secondProjectile, ArrayList<CarCrashSmoke> carCrashSmokeClouds
@@ -223,6 +225,8 @@ public class RenderTree {
 		        (long) (DURATION_OF_SMOKE_CLOUD_IN_SECONDS*1000)
 		);
 		
+		///THIERR!
+		//MyGdxGame.carCrashSFX.play();
 		
 		
 		

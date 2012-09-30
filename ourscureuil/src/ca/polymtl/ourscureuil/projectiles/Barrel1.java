@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import ca.polymtl.ourscureuil.DeadFrog;
 import ca.polymtl.ourscureuil.Frog;
+import ca.polymtl.ourscureuil.MyGdxGame;
 import ca.polymtl.ourscureuil.Node;
 import ca.polymtl.ourscureuil.Projectile;
 import ca.polymtl.ourscureuil.BarrelExplosion;
@@ -125,8 +126,12 @@ public class Barrel1 extends Projectile {
 			                theRenderTree.getCurrentStage().removeActor(splosion);
 			            }
 			        }, 
-			        (long) (DURATION_OF_BARREL_EXPLOSION_IN_SECONDS*1000) 
+			        (long) (DURATION_OF_BARREL_EXPLOSION_IN_SECONDS*1000)
+			        
 			);
+			///THIERR!
+//			MyGdxGame.barrelExplosionSFX.play();
+			
 		} //end of if margins
 		else {
 			System.out.println("inside of margins"+ "(" + x + "," + y + ")");

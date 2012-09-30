@@ -7,6 +7,8 @@ Ken-Ly Duong duong.kenly@gmail.com
 Pierre-Luc Saint-Charles b0mb00z.it@gmail.com
 Thierry Belair climatic4@gmail.com
 
+The password is "greatcanadianappathon"
+
 Instructions:
 
    The goal is to prevent any frog from reaching the other side of the road.
