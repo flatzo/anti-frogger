@@ -44,7 +44,7 @@ public abstract class Projectile extends Node {
 		
 		this.action(MoveBy.$(movement.x*speedfactor*3,-movement.y*speedfactor*resistanceToMovement,mTimeLeft));
 		float degsToRotate = (float) (MathUtils.radiansToDegrees*Math.tan((-movement.y*speedfactor*resistanceToMovement)/(movement.x*speedfactor*3)));
-		this.action(RotateTo.$(degsToRotate,0.1f));
+		this.action(RotateTo.$(degsToRotate+this.rotation,0.1f));
 	}
 
 }

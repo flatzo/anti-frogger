@@ -31,6 +31,8 @@ public class Cop1 extends Projectile {
 		this.scaleX = 1.0f;
 		this.scaleY = 1.0f;
 		this.rotation = 0.0f;
+		if(posStart.x < this.originX)
+			this.rotation = 180.0f;
 		if(texreg == null) {
 			texreg = new TextureRegion(projectileTextureList, 48, 96, 48, 48);
 		}
