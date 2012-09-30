@@ -37,6 +37,10 @@ public class Motorcycle1 extends Projectile {
 			texreg = new TextureRegion(projectileTextureList, 0, 48, 48, 48);
 		}
 	}
+	
+	public void dispose() {
+		texreg = null;
+	}
 
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {

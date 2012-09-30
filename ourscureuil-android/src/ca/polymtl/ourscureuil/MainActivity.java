@@ -16,12 +16,11 @@ public class MainActivity extends AndroidApplication {
         AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
         cfg.useGL20 = false;
         
-        SoundManager.getInstance(); //creates the instance
-		SoundManager.initSounds(this);
-		
-		
-		
         initialize(new MyGdxGame(), cfg);
     }
     
+    @Override
+    public void onBackPressed() {
+    	
+    }
 }

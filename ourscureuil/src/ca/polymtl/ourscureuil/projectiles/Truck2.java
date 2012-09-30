@@ -38,6 +38,10 @@ public class Truck2 extends Projectile {
 		}
 	}
 
+	public void dispose() {
+		texreg = null;
+	}
+	
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		if(this.x<0.0f) {

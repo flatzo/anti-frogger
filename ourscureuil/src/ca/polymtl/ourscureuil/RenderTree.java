@@ -29,9 +29,14 @@ public class RenderTree {
 
 	public RenderTree(float stagewidth, float stageheight, boolean stretch, SpriteBatch batch) {
 		mStage = new Stage(stagewidth,stageheight,stretch,batch);
-		
 	}
 	
+	public void dispose() {
+		for(Node child : children) {
+			((Projectile) child ).dispose();
+		}
+		mStage.dispose();
+	}
 
 	public void draw() {
 		// this.instantiateMonsters();
@@ -119,33 +124,33 @@ public class RenderTree {
 	
 	public boolean intersectionRectangleRectangle(Vector2 startPos1, float height1, float width1,
 													Vector2 startPos2, float height2, float width2) {
-		
+		final float padding = 10;
 
-	     if ( startPos1.y        > startPos2.y &&
-	    	  startPos1.y        < startPos2.y+height2 &&// 1y basegauche est entre y2 hauteur 
-	          startPos1.x        < startPos2.x+width2 && 
-	          startPos1.x        > startPos2.x  // 1x basegauche est entre 2x largeur
+	     if ( startPos1.y        > startPos2.y 			+ padding &&
+	    	  startPos1.y        < startPos2.y+height2 	- padding &&// 1y basegauche est entre y2 hauteur 
+	          startPos1.x        < startPos2.x+width2 	- padding && 
+	          startPos1.x        > startPos2.x 			+ padding  // 1x basegauche est entre 2x largeur
 	        ) {
 	         return true;
 	     }
-	     if ( startPos1.y+height1 > startPos2.y &&
-	          startPos1.y+height1 < startPos2.y+height2 && // 1y hautgauche est entre 2y hauteur
-	          startPos1.x         < startPos2.x+width2 &&
-	          startPos1.x         > startPos2.x  // 1x hautgauche est entre 2x largeur
+	     if ( startPos1.y+height1 > startPos2.y 		+ padding &&
+	          startPos1.y+height1 < startPos2.y+height2	- padding && // 1y hautgauche est entre 2y hauteur
+	          startPos1.x         < startPos2.x+width2	- padding &&
+	          startPos1.x         > startPos2.x  		+ padding// 1x hautgauche est entre 2x largeur
 	        ) {
 	         return true;
 	     }
-	     if ( startPos1.y+height1 > startPos2.y &&
-	          startPos1.y+height1 < startPos2.y+height2 && //1y hautdroite est entre 2y hauteur
-	          startPos1.x+width1  < startPos2.x+width2 &&
-	          startPos1.x+width1  > startPos2.x // 1x hautdroite est entre 2x largeur
+	     if ( startPos1.y+height1 > startPos2.y 		+ padding &&
+	          startPos1.y+height1 < startPos2.y+height2	- padding && //1y hautdroite est entre 2y hauteur
+	          startPos1.x+width1  < startPos2.x+width2	- padding &&
+	          startPos1.x+width1  > startPos2.x 		+ padding// 1x hautdroite est entre 2x largeur
 	        ) {
 	         return true;
 	     }
-	     if ( startPos1.y         < startPos2.y &&
-	          startPos1.y         > startPos2.y+height2 && // 1y basdroite est entre 2y hauteur
-	          startPos1.x+width1  < startPos2.x+width2 &&
-	          startPos1.x+width1  > startPos2.x //1x basdroite est entre 2x largeur 
+	     if ( startPos1.y         < startPos2.y			+ padding &&
+	          startPos1.y         > startPos2.y+height2 - padding && // 1y basdroite est entre 2y hauteur
+	          startPos1.x+width1  < startPos2.x+width2	+ padding &&
+	          startPos1.x+width1  > startPos2.x 		- padding//1x basdroite est entre 2x largeur 
 	        ){ 
 	         return true;
 	     }

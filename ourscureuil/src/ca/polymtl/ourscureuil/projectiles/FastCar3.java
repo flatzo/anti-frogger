@@ -37,6 +37,10 @@ public class FastCar3 extends Projectile {
 			texreg = new TextureRegion(projectileTextureList, 144, 96, 48, 48);
 		}
 	}
+	
+	public void dispose() {
+		texreg = null;
+	}
 
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {

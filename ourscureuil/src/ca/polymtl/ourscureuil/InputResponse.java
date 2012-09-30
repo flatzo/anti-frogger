@@ -100,6 +100,14 @@ public class InputResponse implements GestureListener {
 	@Override
 	public boolean tap(int x, int y, int count) {
 		// TODO Auto-generated method stub
+		
+		if (MyGdxGame.gameState == GameState.GAME_OVER) {
+			MyGdxGame.gameState = GameState.NEW_GAME;
+		}
+		else if (MyGdxGame.gameState == GameState.VICTORY) {
+			MyGdxGame.gameState = GameState.NEW_GAME;
+		}
+		
 		return false;
 	}
 
@@ -120,11 +128,9 @@ public class InputResponse implements GestureListener {
 		}
 		else if (MyGdxGame.gameState == GameState.GAME_OVER) {
 			MyGdxGame.gameState = GameState.NEW_GAME;
-			System.out.println("new game");
 		}
 		else if (MyGdxGame.gameState == GameState.VICTORY) {
 			MyGdxGame.gameState = GameState.NEW_GAME;
-			System.out.println("new game");
 		}
 
 		return false;

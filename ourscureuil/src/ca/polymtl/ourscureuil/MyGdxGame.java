@@ -2,8 +2,6 @@ package ca.polymtl.ourscureuil;
 
 import java.util.ArrayList;
 
-import android.R;
-import android.media.MediaPlayer;
 import ca.polymtl.ourscureuil.Projectile.ProjectileType;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -58,9 +56,8 @@ public class MyGdxGame implements ApplicationListener {
 	@Override
 	public void create() {
 		remainingTime = Score.getInstance().getMaxTime();
-		float deviceWidth = Gdx.graphics.getWidth();
-		float deviceHeight = Gdx.graphics.getHeight();
-		batch = new SpriteBatch();
+		if(batch == null)
+			batch = new SpriteBatch();
 		hud = new HUD(800, 480, batch);
 		renderTree = new RenderTree(800, 480, true, batch);
 		inputResponse = new InputResponse();
@@ -78,14 +75,14 @@ public class MyGdxGame implements ApplicationListener {
 		// gameOverBG = new LevelBG("data/level1v2_1024.png");
 		renderTree.getCurrentStage().addActor(gameLevelBG);
 
-		// audioPlayer.newSound(fileHandle)
-		scoundrelSFX = Gdx.audio.newSound(Gdx.files
-				.internal("data/scoundrel.mp3"));
 		newGameSFX = Gdx.audio.newSound(Gdx.files.internal("data/newgame.mp3"));
 		squishSFX = Gdx.audio.newSound(Gdx.files.internal("data/dead_frog.wav"));
 		victoryMusic = Gdx.audio.newMusic(Gdx.files.internal("data/victory.mp3"));
+		//victoryMusic.setVolume(1.5f);
 		playingMusic = Gdx.audio.newMusic(Gdx.files.internal("data/loop.mp3"));
+		playingMusic.setVolume(0.5f);
 		gameOverMusic = Gdx.audio.newMusic(Gdx.files.internal("data/gameover.mp3"));
+		gameOverMusic.setVolume(0.5f);
 		//barrelExplosionSFX = Gdx.audio.newSound(Gdx.files.internal("data/barrelExplosion.wav"));
 		//carCrashSFX = Gdx.audio.newSound(Gdx.files.internal("data/carcrash.wav"));
 
@@ -122,9 +119,7 @@ public class MyGdxGame implements ApplicationListener {
 	@Override
 	public void dispose() {
 		batch.dispose();
-		// mPlay.stop();
-		// mPlay.release();
-		// mPlay = null ;
+		scene.dispose();
 	}
 
 	@Override
@@ -234,6 +229,28 @@ public class MyGdxGame implements ApplicationListener {
 
 	@Override
 	public void resume() {
+		create();
+		createNewGame();
 	}
-
+	
+	private void createNewGame() {
+		remainingTime = Score.getInstance().getMaxTime();
+		renderTree = new RenderTree(800,480,true,batch);
+		inputResponse.registerRenderTree(renderTree);
+		Gdx.input.setInputProcessor(new GestureDetector(inputResponse));
+		
+		Score.getInstance().reset();
+		//Spawn les objets pour le level 1
+		//scene = new Scene(deviceWidth,deviceHeight,renderTree);
+		scene = new Scene(800,480,renderTree);
+		inputResponse.registerScene(scene);
+		//gameOverBG = new LevelBG("data/level1v2_1024.png");
+		renderTree.getCurrentStage().act(0);
+		renderTree.getCurrentStage().addActor(gameLevelBG);
+		renderTree.getCurrentStage().removeActor(gameOverBG);
+		gameState= GameState.PLAYING;
+	}
+	
+	
+	
 }

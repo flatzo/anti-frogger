@@ -57,6 +57,10 @@ public class Scene {
 		 this.mWidth = w;
 	}
 	
+	public void dispose() {
+		renderTree.dispose();
+	}
+	
 	public void draw()
 	{
 		actualTimer += Gdx.graphics.getDeltaTime();

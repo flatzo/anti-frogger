@@ -37,6 +37,10 @@ public class Truck1 extends Projectile {
 			texreg = new TextureRegion(projectileTextureList, 0, 0, 96, 48);
 		}
 	}
+	
+	public void dispose() {
+		texreg = null;
+	}
 
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {

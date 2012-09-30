@@ -47,4 +47,6 @@ public abstract class Projectile extends Node {
 		this.action(RotateTo.$(degsToRotate+this.rotation,0.1f));
 	}
 
+	public abstract void dispose();
+
 }

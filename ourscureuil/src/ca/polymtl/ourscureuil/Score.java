@@ -24,8 +24,6 @@ public class Score {
 		remainingLife = 5;
 		maxTime = 75;
 		gameOver = false;
-		///win faster
-		//maxTime = 5;
 		
 	}
 	
@@ -36,15 +34,11 @@ public class Score {
 	}
 	
 	public void killALife() {
-		///debug
 		if(remainingLife > 0)
 			remainingLife--;
 		else
 			gameOver = true;
 		
-		///die quickly
-		remainingLife = 0;
-		gameOver = true;
 	}
 	
 	public boolean isGameOver() {
