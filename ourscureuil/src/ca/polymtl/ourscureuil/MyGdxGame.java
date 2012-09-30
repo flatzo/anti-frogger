@@ -43,6 +43,7 @@ public class MyGdxGame implements ApplicationListener {
 		//Spawn les objets pour le level 1
 		//scene = new Scene(deviceWidth,deviceHeight,renderTree);
 		scene = new Scene(800,480,renderTree);
+		inputResponse.registerScene(scene);
 		renderTree.getCurrentStage().addActor(new LevelBG("data/level1v2_1024.png"));
 	}
 

@@ -1,6 +1,7 @@
 package ca.polymtl.ourscureuil;
 
 import ca.polymtl.ourscureuil.*;
+import ca.polymtl.ourscureuil.projectiles.Barrel1;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
@@ -14,6 +15,7 @@ public class InputResponse implements GestureListener {
 
 	Projectile mSelectedProjectile = null; //can be null
 	RenderTree theRenderTree;
+	Scene theScene;
 	
 	InputResponse() {
 		super();
@@ -21,6 +23,9 @@ public class InputResponse implements GestureListener {
 	
 	void registerRenderTree(RenderTree renderTree) {
 		theRenderTree = renderTree;
+	}
+	void registerScene(Scene scene) {
+		theScene = scene;
 	}
 	
 	void selectProjectileAtPosition(int x, int y) {
@@ -47,7 +52,9 @@ public class InputResponse implements GestureListener {
 		//System.out.println(actorFound.touchDragged(x, y, pointer));
 		//System.out.println(actorFound.);
 		
-		if (!actorFound.name.startsWith("projectile")) {
+		String nameOfSelected = actorFound.name;
+		String projectilePrefix = "projectile";
+		if (!nameOfSelected.startsWith(projectilePrefix)) {
 			//pas d/placable
 			mSelectedProjectile = null;
 			System.out.println("no actor found with name projectile");
@@ -56,6 +63,22 @@ public class InputResponse implements GestureListener {
 		
 		// si on arrive ici, alors on sait que l'actor choisit est un projectile
 		mSelectedProjectile = (Projectile)actorFound;
+		
+		
+		//bang on Barrel
+		
+		//remove projectileprefix
+		nameOfSelected = nameOfSelected.substring(projectilePrefix.length()); //beginning index is included, 
+		if (nameOfSelected.startsWith("Barrel1") ) {
+			Barrel1 mSelectedBarrel = (Barrel1) mSelectedProjectile;
+			if (mSelectedBarrel != null) {
+				System.out.println("width:" + Integer.toString(theScene.getWidth()));
+				mSelectedBarrel.explodeMaybe(
+						theRenderTree, 
+						theScene
+						); //48 est la moitié de largeur et hauteur
+			}
+		}
 		
 	}
 	

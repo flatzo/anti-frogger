@@ -15,13 +15,13 @@ import com.badlogic.gdx.scenes.scene2d.actions.Repeat;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateTo;
 import com.badlogic.gdx.scenes.scene2d.actions.Sequence;
 
-public class DeadFrog extends Node {
+public class BarrelExplosion extends Node {
 	
-	static final float HITBOX_WIDTH = 48.0f;
-	static final float HITBOX_HEIGHT = 48.0f;
+	static final float HITBOX_WIDTH = 96.0f;
+	static final float HITBOX_HEIGHT = 96.0f;
 	
-	public DeadFrog(Vector2 posStart, String nameOfNode) { //position start is left, bottom corner
-		super(posStart, nameOfNode);
+	public BarrelExplosion(Vector2 posStart /*, String nameOfNode*/) { //position start is left, bottom corner
+		super(posStart, "BarrelExplosion");
 		this.height = HITBOX_HEIGHT;
 		this.width  = HITBOX_WIDTH;
 		// TODO Auto-generated constructor stub
@@ -34,8 +34,9 @@ public class DeadFrog extends Node {
 	// w = 48
 	// h = 48
 	
-	static protected TextureRegion texregDead = new TextureRegion(projectileTextureList, 96, 144, 48, 48); //grenouille morte 
-	//static protected TextureRegion texregDead = new TextureRegion(projectileTextureList, 144, 144, 48, 48); //car crash smoke
+	//static protected TextureRegion texregDead = new TextureRegion(projectileTextureList, 96, 144, 48, 48); //grenouille morte 
+	//static protected TextureRegion texregBarrelExplosion = new TextureRegion(projectileTextureList, 144, 192, 96, 96); //car crash smoke
+	static protected TextureRegion texregBarrelExplosion = new TextureRegion(projectileTextureList, 0, 192, 96, 96); //barrel explosion
 	
 	
 	public void SetMovement(Vector2 movement) {
@@ -50,7 +51,7 @@ public class DeadFrog extends Node {
 		//System.out.println("(" + Double.toString(x) + "," + Double.toString(y) + ")");
 		
 		
-		batch.draw(texregDead,this.originX+this.x,this.originY+this.y,HITBOX_WIDTH/2,HITBOX_HEIGHT/2,HITBOX_WIDTH,HITBOX_HEIGHT,1.0f,1.0f,this.rotation);
+		batch.draw(texregBarrelExplosion,this.originX+this.x,this.originY+this.y,HITBOX_WIDTH/2,HITBOX_HEIGHT/2,HITBOX_WIDTH,HITBOX_HEIGHT,1.0f,1.0f,this.rotation);
 	}
 
 	@Override

@@ -31,7 +31,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.LibgdxToolkit;
 import com.sun.xml.internal.ws.api.message.Message;
 
 public class Scene {
-	private int w;
+	private int mWidth;
 	private int h;
 	private RenderTree renderTree;
 	private float timeToAddProjectile = 2.0f;
@@ -44,15 +44,17 @@ public class Scene {
 	public ArrayList<Frog> frogs = new ArrayList<Frog>();
 	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	public ArrayList<DeadFrog> deadFrogs = new ArrayList<DeadFrog>();
-	public ArrayList<Barrel1> barrels = new ArrayList<Barrel1>();
+	//public ArrayList<Barrel1> barrels = new ArrayList<Barrel1>();
 	public ArrayList<CarCrashSmoke> carCrashSmokeClouds = new ArrayList<CarCrashSmoke>();
+	public ArrayList<BarrelExplosion> barrelExplosions = new ArrayList<BarrelExplosion>();
 	
 	
 	public Scene(int w,int h, RenderTree rt) {
-		
+		System.out.println("w:" + Integer.toString(w));
 		 java.util.Arrays.fill(activeProjectiles, false);
 		 renderTree = rt;
 		 setProjectilesWaypoints(w,h);
+		 this.mWidth = w;
 	}
 	
 	public void draw()
@@ -86,7 +88,9 @@ public class Scene {
 	public Actor addProjectile(int idPos, ProjectileType projectileType) {
 		
 		Stage stage = renderTree.getCurrentStage();
-		switch(projectileType) {
+		ProjectileType debug = ProjectileType.BARREL;
+		switch(debug) {
+		//switch(projectileType) {
 			case TRUCK1:
 				Truck1 newTruck1 = new Truck1(waypointsProjectiles[idPos]);
 				stage.addActor(newTruck1);
@@ -133,11 +137,11 @@ public class Scene {
 				projectiles.add(newCop1);
 				return newCop1;
 			case BARREL:
-				System.out.println("idPos:" +idPos);
-				if (idPos >= 8) {
-					System.out.println("idPos random too high");
-				}
-				System.out.println("wpp" + waypointsProjectiles[idPos]);
+//				System.out.println("idPos:" +idPos);
+//				if (idPos >= 8) {
+//					System.out.println("idPos random too high");
+//				}
+//				System.out.println("wpp" + waypointsProjectiles[idPos]);
 				Barrel1 newBarrel1 = new Barrel1(waypointsProjectiles[idPos]);
 				stage.addActor(newBarrel1);
 				projectiles.add(newBarrel1);
@@ -213,5 +217,10 @@ public class Scene {
 		frogs.add(frog);
 		frog.SetMovement(new Vector2(vX,vY));
 		
+	}
+	
+	public int getWidth() {
+		System.out.println("w:" + Integer.toString(this.mWidth));
+		return this.mWidth;
 	}
 }

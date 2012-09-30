@@ -162,6 +162,16 @@ public class RenderTree {
 	private final float DURATION_OF_CADAVER_IN_SECONDS = 1f;
 	private final float DURATION_OF_SMOKE_CLOUD_IN_SECONDS = 1f;
 	
+	public void killAllFrog(ArrayList<DeadFrog> deadFrogs,
+			ArrayList<Frog> liveFrogs) {
+		while(!liveFrogs.isEmpty()) {
+			int indexOfLiveFrog = liveFrogs.size()-1;
+			Node frogToKill = liveFrogs.get(liveFrogs.size()-1);
+			killFrog(frogToKill, deadFrogs, liveFrogs, indexOfLiveFrog);
+		}
+	}
+	
+	
 	private void killFrog(Node frogToKill, ArrayList<DeadFrog> deadFrogs, ArrayList<Frog> liveFrogs, int indexOfLifeFrog) {
 		final DeadFrog cadaver = new DeadFrog(new Vector2(frogToKill.x, frogToKill.y), "dead"+frogToKill.name);
 		deadFrogs.add(cadaver);

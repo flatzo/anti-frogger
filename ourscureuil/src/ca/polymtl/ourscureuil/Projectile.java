@@ -28,8 +28,8 @@ public abstract class Projectile extends Node {
 	
 	public abstract float GetProjectileMaxSpeed();
 	
-	public Projectile( Vector2 posStart ) {
-		super ( posStart, new String("projectile").concat( new Integer(projectileId).toString()) );
+	public Projectile( Vector2 posStart , String nomSpecifique) {
+		super ( posStart, new String("projectile"+nomSpecifique).concat( new Integer(projectileId).toString()) );
 		if(projectileTextureList == null) {
 			projectileTextureList = new Texture(Gdx.files.internal("data/vehicles_512.png"));
 			projectileTextureList.setFilter(TextureFilter.Linear, TextureFilter.Linear);

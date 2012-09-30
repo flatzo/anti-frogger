@@ -29,10 +29,11 @@ public class Score {
 	}
 	
 	public void killALife() {
-		if(remainingLife > 0)
-			remainingLife--;
-		else
-			gameOver = true;
+		///debug
+//		if(remainingLife > 0)
+//			remainingLife--;
+//		else
+//			gameOver = true;
 	}
 	
 	public boolean isGameOver() {
