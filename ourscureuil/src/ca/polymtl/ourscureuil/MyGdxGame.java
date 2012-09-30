@@ -60,7 +60,7 @@ public class MyGdxGame implements ApplicationListener {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		
-		renderTree.reactCollisionFrogs(scene.frogs, scene.projectiles);
+		renderTree.reactCollisionFrogs(scene.frogs, scene.projectiles, scene.deadFrogs);
 		
 		//batch.setProjectionMatrix(camera.combined);
 		float deltaTime = Gdx.app.getGraphics().getDeltaTime();

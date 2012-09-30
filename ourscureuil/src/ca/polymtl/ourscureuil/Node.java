@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.Scaling;
 
 public abstract class Node extends Actor {
 	
-	public Node(Vector2 posStart, String nameOfNode) {
+	public Node(Vector2 posStart, String nameOfNode) { //position start is left, bottom corner
 		super(nameOfNode);
 		setPosition(posStart.x,posStart.y);
 	}

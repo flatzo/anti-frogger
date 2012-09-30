@@ -41,6 +41,7 @@ public class Scene {
 	
 	public ArrayList<Frog> frogs = new ArrayList<Frog>();
 	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	public ArrayList<DeadFrog> deadFrogs = new ArrayList<DeadFrog>();
 	
 	
 	public Scene(int w,int h, RenderTree rt) {

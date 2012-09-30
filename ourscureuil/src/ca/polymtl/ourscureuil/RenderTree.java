@@ -58,7 +58,7 @@ public class RenderTree {
 	
 	
 	
-	public void reactCollisionFrogs(ArrayList<Frog> frogs, ArrayList<Projectile> projectiles)
+	public void reactCollisionFrogs(ArrayList<Frog> frogs, ArrayList<Projectile> projectiles, ArrayList<DeadFrog> deadFrogs)
 	{
 		for(int i=0; i< frogs.size(); i++)
 		{
@@ -101,7 +101,12 @@ public class RenderTree {
 				
 				
 				if(intersectionRoundRound(c1, r1, c2, r2))
+				{
+					DeadFrog cadaver = new DeadFrog(new Vector2(frog.x, frog.y), "dead"+frog.name);
+					deadFrogs.add(cadaver);
+					this.getCurrentStage().addActor(cadaver);
 					this.getCurrentStage().removeActor(frog);
+				}
 				
 				
 			}
