@@ -22,9 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 public class MyGdxGame implements ApplicationListener {
 	
 	private RenderTree renderTree;
-	private OrthographicCamera camera;
 	private SpriteBatch batch;
-	private SpriteBatch hudBatch;
 	private HUD hud;
 	private InputResponse inputResponse;
 	private Scene scene;
@@ -59,20 +57,23 @@ public class MyGdxGame implements ApplicationListener {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
-		
 		renderTree.reactCollisionFrogs(scene.frogs, scene.projectiles, scene.deadFrogs);
 		
 		//batch.setProjectionMatrix(camera.combined);
 		float deltaTime = Gdx.app.getGraphics().getDeltaTime();
 		remainingTime -= deltaTime;
-		if(remainingTime >= 0.0f) {
+		
+		 if(Score.getInstance().isGameOver()) {
+				// TODO Afficher game over
+				System.out.println("Game over");
+		 } else	if(remainingTime >= 0.0f) {
 			renderTree.getCurrentStage().act(deltaTime);
 			renderTree.draw();	
-			hud.draw(5, 8, (int) remainingTime);
+			hud.draw((int) remainingTime);
 			
 			scene.draw();
 		} else {
-			// AFFICHER UN GAME OVER
+			// TODO AFFICHER GAGNANT
 		}
 		
 	}

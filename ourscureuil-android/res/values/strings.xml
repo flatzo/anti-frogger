@@ -7,4 +7,7 @@
     <string name="title_goal">Goal</string>
     <string name="text_goal">Aim toward the frogs in order to prevent them from reaching the other side of the road.</string>
     <string name="btn_instructions">See Instructions</string>
+    <string name="title_options_time">Choose time</string>
+    <string name="options_title_life">How much life</string>
+    <string name="btn_options">Options</string>
 </resources>

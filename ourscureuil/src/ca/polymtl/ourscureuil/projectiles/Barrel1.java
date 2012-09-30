@@ -33,8 +33,7 @@ public class Barrel1 extends Projectile {
 
 	@Override
 	public Actor hit(float x, float y) {
-		float h_tot = Gdx.graphics.getHeight();
-		if(	x>=(this.originX+this.x) && x<=(this.originX+this.x+HITBOX_WIDTH) && (h_tot-y)>=(this.originY+this.y) && (h_tot-y)<=(this.originY+this.y+HITBOX_HEIGHT)) {
+		if( x > 0 && x < this.width && y > 0 && y < this.height) {
 			return this;
 		}
 		return null;

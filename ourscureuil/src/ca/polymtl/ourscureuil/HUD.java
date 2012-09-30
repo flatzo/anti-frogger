@@ -31,7 +31,10 @@ public class HUD {
 		timer.setColor(0.0f,1.0f,0.0f,1.0f);
 	}
 	
-	public void draw(int nCurrLife, int nTotLife, int nRemainingTimeSec) {
+	public void draw(int nRemainingTimeSec) {
+		int remainingLifeCount = Score.getInstance().getRemainingLifeCount();
+		int totalLifeCount 		= Score.getInstance().getTotalLifeCount();
+		
 		int seconds = nRemainingTimeSec % 60;
 		int minutes = nRemainingTimeSec / 60;
 		String time = (minutes < 10 ? "0" : "") + String.valueOf(minutes) + 
@@ -39,8 +42,8 @@ public class HUD {
 		
 		batch.begin();
 		batch.draw(lifebarLeftBorder, 80, deviceHeight-40);
-		batch.draw(lifebarRightBorder, 80+1+(nTotLife-1)*(18+2), deviceHeight-40);
-		for(int i = 0; i < nCurrLife; ++i) {
+		batch.draw(lifebarRightBorder, 80+1+(totalLifeCount-1)*(18+2), deviceHeight-40);
+		for(int i = 0; i < remainingLifeCount; ++i) {
 			batch.draw(lifebarPoint, 80+1+i*(18+2), deviceHeight-40);
 		}
 		timer.draw(batch, time, deviceWidth-150, deviceHeight-10);

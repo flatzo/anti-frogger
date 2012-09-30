@@ -51,10 +51,6 @@ public class Truck1 extends Projectile {
 		if( x > 0 && x < this.width && y > 0 && y < this.height) {
 			return this;
 		}
-		float h_tot = Gdx.graphics.getHeight();
-		if(	x>=(this.x) && x<=(this.x+this.width) && (h_tot-y)>=(this.y) && (h_tot-y)<=(this.y+this.height)) {
-			return this;
-		}
 		return null;
 	}
 

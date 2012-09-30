@@ -1,18 +1,14 @@
 package ca.polymtl.ourscureuil;
  
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveBy;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveTo;
 import com.badlogic.gdx.scenes.scene2d.actions.Repeat;
-import com.badlogic.gdx.scenes.scene2d.actions.RotateTo;
 import com.badlogic.gdx.scenes.scene2d.actions.Sequence;
 
 public class Frog extends Node {
@@ -30,7 +26,6 @@ public class Frog extends Node {
 	protected static final Texture projectileTextureList = new Texture(Gdx.files.internal("data/vehicles_512.png"));
 	static protected TextureRegion texreg = new TextureRegion(projectileTextureList, 48, 144, 48, 48);	
 	
-	private float mTimeLeft = 6;
 	
 	public void SetMovement(Vector2 movement) {
 		this.action(Repeat.$(Sequence.$(MoveBy.$(movement.x, movement.y, 1), MoveBy.$(-movement.x, movement.y, 1)),5));
@@ -38,8 +33,14 @@ public class Frog extends Node {
 
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
+		if(this.y > Gdx.graphics.getWidth() - 10) {
+			this.remove();
+			Score.getInstance().killALife();
+		} else {
+			batch.draw(texreg,this.originX+this.x,this.originY+this.y,HITBOX_WIDTH/2,HITBOX_HEIGHT/2,HITBOX_WIDTH,HITBOX_HEIGHT,1.0f,1.0f,this.rotation);
+		}
 		// TODO Auto-generated method stub
-		batch.draw(texreg,this.originX+this.x,this.originY+this.y,HITBOX_WIDTH/2,HITBOX_HEIGHT/2,HITBOX_WIDTH,HITBOX_HEIGHT,1.0f,1.0f,this.rotation);
+		
 	}
 
 	@Override
