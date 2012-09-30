@@ -28,7 +28,7 @@ public class Frog extends Node {
 	
 	
 	public void SetMovement(Vector2 movement) {
-		this.action(Repeat.$(Sequence.$(MoveBy.$(movement.x, movement.y, 1), MoveBy.$(-movement.x, movement.y, 1)),5));
+		this.action(Repeat.$(Sequence.$(MoveBy.$(movement.x, movement.y, 1), MoveBy.$(-movement.x, movement.y, 1)),7));
 	}
 
 	@Override

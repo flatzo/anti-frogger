@@ -204,15 +204,5 @@ public class Scene {
 		frogs.add(frog);
 		frog.SetMovement(new Vector2(vX,vY));
 		
-		new java.util.Timer().schedule( 
-		        new java.util.TimerTask() {
-		            @Override
-		            public void run() {
-		                renderTree.getCurrentStage().removeActor(frog);
-		            }
-		        }, 
-		        (long) (timeOfLife*1000) 
-		);
-			
 	}
 }

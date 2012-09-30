@@ -20,15 +20,30 @@ public class Barrel1 extends Projectile {
 	static final float MAX_SPEED = 1.7f;
 	public static final float HITBOX_WIDTH = 48.0f;
 	static final float HITBOX_HEIGHT = 48.0f;
-	static protected TextureRegion texreg = new TextureRegion(projectileTextureList, 144, 0, 48, 48);	
+	static protected TextureRegion texreg;	
 	
 	public Barrel1( Vector2 posStart ) {
 		super ( posStart );
+		this.width = HITBOX_WIDTH;
+		this.height = HITBOX_HEIGHT;
+		this.originX = HITBOX_WIDTH/2;
+		this.originY = HITBOX_HEIGHT/2;
+		this.scaleX = 1.0f;
+		this.scaleY = 1.0f;
+		this.rotation = 0.0f;
+		if(texreg == null) {
+			texreg = new TextureRegion(projectileTextureList, 144, 0, 48, 48);
+		}
 	}
 
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
-		batch.draw(texreg,this.originX+this.x,this.originY+this.y,HITBOX_WIDTH/2,HITBOX_HEIGHT/2,HITBOX_WIDTH,HITBOX_HEIGHT,1.0f,1.0f,this.rotation);
+		if(this.x<0.0f) {
+			batch.draw(texreg,this.x,this.y,this.originX,this.originY,this.width,this.height,-this.scaleX,this.scaleY,this.rotation);
+		}
+		else {
+			batch.draw(texreg,this.x,this.y,this.originX,this.originY,this.width,this.height,this.scaleX,this.scaleY,this.rotation);
+		}
 	}
 
 	@Override
