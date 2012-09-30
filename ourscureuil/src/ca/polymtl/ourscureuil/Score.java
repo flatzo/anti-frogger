@@ -3,7 +3,7 @@ package ca.polymtl.ourscureuil;
 public class Score {
 	static Score instance;
 	
-	static Score getInstance() {
+	public static Score getInstance() {
 		if(instance == null) {
 			instance = new Score();
 		}
@@ -13,10 +13,13 @@ public class Score {
 	private int maxLife;
 	private int remainingLife;
 	private boolean gameOver;
+	private int maxTime;
 	
 	private Score() {
 		maxLife = 5;
 		remainingLife = 5;
+		maxTime = 75;
+		gameOver = false;
 	}
 	
 	public void setLife(int count) {
@@ -44,6 +47,14 @@ public class Score {
 	public int getTotalLifeCount() {
 		// TODO Auto-generated method stub
 		return maxLife;
+	}
+	
+	public int getMaxTime() {
+		return maxTime;
+	}
+	
+	public void setTime(int seconds) {
+		maxTime = seconds;
 	}
 	
 	

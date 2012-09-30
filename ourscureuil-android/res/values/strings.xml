@@ -10,4 +10,5 @@
     <string name="title_options_time">Choose time</string>
     <string name="options_title_life">How much life</string>
     <string name="btn_options">Options</string>
+    <string name="btn_save">Save</string>
 </resources>

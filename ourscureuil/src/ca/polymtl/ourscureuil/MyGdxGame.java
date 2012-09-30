@@ -31,7 +31,7 @@ public class MyGdxGame implements ApplicationListener {
 	
 	@Override
 	public void create() {	
-		remainingTime = defaultTimer;
+		remainingTime = Score.getInstance().getMaxTime();
 		float deviceWidth = Gdx.graphics.getWidth();
 		float deviceHeight = Gdx.graphics.getHeight();
 		batch = new SpriteBatch();
