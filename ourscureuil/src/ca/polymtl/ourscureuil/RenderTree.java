@@ -194,7 +194,9 @@ public class RenderTree {
 		        }, 
 		        (long) (DURATION_OF_CADAVER_IN_SECONDS*1000) 
 		);
-		MyGdxGame.squishSFX.play();
+		if (!MyGdxGame.isMuted) {
+			MyGdxGame.squishSFX.play();
+		}
 		
 	}
 
@@ -231,7 +233,9 @@ public class RenderTree {
 		);
 		
 		///THIERR!
-		//MyGdxGame.carCrashSFX.play();
+		if (!MyGdxGame.isMuted) {
+			MyGdxGame.carCrashSFX.play();
+		}
 		
 		
 		

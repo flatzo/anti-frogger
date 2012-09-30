@@ -34,6 +34,8 @@ public class MyGdxGame implements ApplicationListener {
 	private LevelBG gameLevelBG;
 	private LevelBG gameOverBG;
 	private LevelBG victoryScreenBG;
+	
+	public static boolean isMuted = false;
 
 	// private MediaPlayer mPlay;
 	Audio audioPlayer = Gdx.audio;
@@ -80,14 +82,15 @@ public class MyGdxGame implements ApplicationListener {
 		victoryMusic = Gdx.audio.newMusic(Gdx.files.internal("data/victory.mp3"));
 		//victoryMusic.setVolume(1.5f);
 		playingMusic = Gdx.audio.newMusic(Gdx.files.internal("data/loop.mp3"));
-		playingMusic.setVolume(0.5f);
+		playingMusic.setVolume(0.3f);
 		gameOverMusic = Gdx.audio.newMusic(Gdx.files.internal("data/gameover.mp3"));
 		gameOverMusic.setVolume(0.5f);
-		//barrelExplosionSFX = Gdx.audio.newSound(Gdx.files.internal("data/barrelExplosion.wav"));
-		//carCrashSFX = Gdx.audio.newSound(Gdx.files.internal("data/carcrash.wav"));
+		barrelExplosionSFX = Gdx.audio.newSound(Gdx.files.internal("data/explosion.mp3"));
+		carCrashSFX = Gdx.audio.newSound(Gdx.files.internal("data/carcrash.mp3"));
 
 		// scoundrelSFX.play();
 		newGameSFX.play();
+		
 		new java.util.Timer().schedule(new java.util.TimerTask() {
 			@Override
 			public void run() {

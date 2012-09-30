@@ -91,6 +91,36 @@ public class InputResponse implements GestureListener {
 	@Override
 	public boolean touchDown(int x, int y, int pointer) {
 
+		//check mute/unmute
+		System.out.println("touchdown");
+		System.out.println("finger:" + Double.toString((float)(x*800/Gdx.graphics.getWidth())) + "," + Double.toString(((((float)y)-Gdx.graphics.getHeight())*480/Gdx.graphics.getHeight())) + ",height:"+ HUD.muteButtonHeight
+				+ ",width" + HUD.muteButtonWidth);
+		System.out.println("bouton:" + Double.toString(HUD.muteButtonX) + "," + Double.toString(HUD.muteButtonY) + ",height:"+ HUD.muteButtonHeight
+				+ ",width" + HUD.muteButtonWidth);
+		if (theRenderTree.intersectionRectangleRectangle(new Vector2((float)(x*800/Gdx.graphics.getWidth()), ((Gdx.graphics.getHeight()-((float)y))*480/Gdx.graphics.getHeight())), HUD.muteButtonHeight, HUD.muteButtonWidth, new Vector2(HUD.muteButtonX, HUD.muteButtonY), HUD.muteButtonHeight, HUD.muteButtonWidth)) {
+			MyGdxGame.isMuted = !MyGdxGame.isMuted;
+			if (MyGdxGame.isMuted) {
+				MyGdxGame.playingMusic.stop();
+				MyGdxGame.gameOverMusic.stop();
+				MyGdxGame.victoryMusic.stop();
+			}
+			else {
+				if (MyGdxGame.gameState == GameState.PLAYING) {
+					MyGdxGame.playingMusic.play();
+				}
+				else if (MyGdxGame.gameState == GameState.VICTORY) {
+					MyGdxGame.victoryMusic.play();
+				}
+				else if (MyGdxGame.gameState == GameState.GAME_OVER) {
+					MyGdxGame.gameOverMusic.play();
+				}
+			}
+			System.out.println("intersetion");
+		}
+		else {
+			System.out.println("no intersection");
+		}
+				
 		// origine: en haut a gauche
 		// note: les coords fournies ici sont donnees sur l'ecran de la device utilisee; il faut donc rescaler a 800x480
 		selectProjectileAtPosition(x, y);

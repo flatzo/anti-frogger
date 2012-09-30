@@ -133,8 +133,10 @@ public class Barrel1 extends Projectile {
 			        (long) (DURATION_OF_BARREL_EXPLOSION_IN_SECONDS*1000)
 			        
 			);
-			///THIERR!
-//			MyGdxGame.barrelExplosionSFX.play();
+			
+			if (!MyGdxGame.isMuted) {
+				MyGdxGame.barrelExplosionSFX.play();
+			}
 			
 		} //end of if margins
 		else {
