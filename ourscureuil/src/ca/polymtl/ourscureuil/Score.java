@@ -30,10 +30,14 @@ public class Score {
 	
 	public void killALife() {
 		///debug
-//		if(remainingLife > 0)
-//			remainingLife--;
-//		else
-//			gameOver = true;
+		if(remainingLife > 0)
+			remainingLife--;
+		else
+			gameOver = true;
+		
+		///die quickly
+		//remainingLife = 0;
+		//gameOver = true;
 	}
 	
 	public boolean isGameOver() {

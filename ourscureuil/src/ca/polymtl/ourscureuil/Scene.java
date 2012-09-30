@@ -67,6 +67,7 @@ public class Scene {
 			SpawnRandomProjectiles();
 			actualTimer = 0.0f;
 		}
+		
 	}
 	
 	private void setProjectilesWaypoints(float w, float h)

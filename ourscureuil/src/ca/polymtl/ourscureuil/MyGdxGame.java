@@ -28,6 +28,10 @@ public class MyGdxGame implements ApplicationListener {
 	private Scene scene;
 	private float remainingTime;
 	
+	private LevelBG gameLevelBG;
+	private LevelBG gameOverBG;
+	
+	
 	@Override
 	public void create() {	
 		remainingTime = Score.getInstance().getMaxTime();
@@ -44,7 +48,10 @@ public class MyGdxGame implements ApplicationListener {
 		//scene = new Scene(deviceWidth,deviceHeight,renderTree);
 		scene = new Scene(800,480,renderTree);
 		inputResponse.registerScene(scene);
-		renderTree.getCurrentStage().addActor(new LevelBG("data/level1v2_1024.png"));
+		gameLevelBG = new LevelBG("data/level1v2_1024.png");
+		gameOverBG = new LevelBG("data/gameOverBG_1024.png");
+		//gameOverBG = new LevelBG("data/level1v2_1024.png");
+		renderTree.getCurrentStage().addActor(gameLevelBG);
 	}
 
 	@Override
@@ -54,7 +61,7 @@ public class MyGdxGame implements ApplicationListener {
 
 	@Override
 	public void render() {	
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+		//Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		renderTree.reactCollisionFrogs(scene.frogs, scene.projectiles, scene.deadFrogs);
@@ -65,8 +72,17 @@ public class MyGdxGame implements ApplicationListener {
 		remainingTime -= deltaTime;
 		
 		 if(Score.getInstance().isGameOver()) {
-				// TODO Afficher game over
-				System.out.println("Game over");
+			 renderTree.getCurrentStage().act(deltaTime);
+			 renderTree.getCurrentStage().addActor(gameOverBG);
+			 renderTree.getCurrentStage().removeActor(gameLevelBG);
+			 hud.draw(0);
+			 
+			 //scene.draw();
+			 renderTree.draw();
+			 
+			 //swipe to continue?
+			 // Afficher game over  //thierry à la rescousse
+				//System.out.println("Game over");
 		 } else	if(remainingTime >= 0.0f) {
 			renderTree.getCurrentStage().act(deltaTime);
 			renderTree.draw();	
