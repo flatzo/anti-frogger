@@ -199,7 +199,7 @@ public class Scene {
 	private void spawnRandomFrog() {
 		float width = Gdx.graphics.getWidth();
 		Random randomGenerator = new Random();
-		int xStart 	= (int) (width * 0.2f + randomGenerator.nextInt((int) (width * 0.6f)));
+		int xStart 	= (int) (100 + randomGenerator.nextInt(600));
 		int vX		= 25+randomGenerator.nextInt(35);
 		int vY		= 35+randomGenerator.nextInt(35);
 		

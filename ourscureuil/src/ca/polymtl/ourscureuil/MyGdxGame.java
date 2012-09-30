@@ -27,7 +27,6 @@ public class MyGdxGame implements ApplicationListener {
 	private InputResponse inputResponse;
 	private Scene scene;
 	private float remainingTime;
-	private final float defaultTimer = 75.0f;
 	
 	@Override
 	public void create() {	

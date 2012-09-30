@@ -33,7 +33,7 @@ public class Frog extends Node {
 
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
-		if(this.y > Gdx.graphics.getWidth() - 10) {
+		if(this.y > 470) {
 			this.remove();
 			Score.getInstance().killALife();
 		} else {
