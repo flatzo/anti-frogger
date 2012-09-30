@@ -23,7 +23,7 @@ public class Truck1 extends Projectile {
 	static protected TextureRegion texreg;	
 	
 	public Truck1( Vector2 posStart ) {
-		super ( posStart ); // sets X and Y
+		super ( posStart, "Truck1" ); // sets X and Y
 		this.width = HITBOX_WIDTH;
 		this.height = HITBOX_HEIGHT;
 		this.originX = HITBOX_WIDTH/2;

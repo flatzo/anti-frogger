@@ -2,7 +2,13 @@ package ca.polymtl.ourscureuil.projectiles;
 
 import java.util.ArrayList; 
 
+import ca.polymtl.ourscureuil.DeadFrog;
+import ca.polymtl.ourscureuil.Frog;
+import ca.polymtl.ourscureuil.Node;
 import ca.polymtl.ourscureuil.Projectile;
+import ca.polymtl.ourscureuil.BarrelExplosion;
+import ca.polymtl.ourscureuil.RenderTree;
+import ca.polymtl.ourscureuil.Scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -23,7 +29,7 @@ public class Barrel1 extends Projectile {
 	static protected TextureRegion texreg;	
 	
 	public Barrel1( Vector2 posStart ) {
-		super ( posStart );
+		super ( posStart, "Barrel1");
 		this.width = HITBOX_WIDTH;
 		this.height = HITBOX_HEIGHT;
 		this.originX = HITBOX_WIDTH/2;
@@ -60,5 +66,79 @@ public class Barrel1 extends Projectile {
 	public float GetProjectileMaxSpeed() {
 		return MAX_SPEED;
 	}
-
-}
+	
+	
+	private final static int EXPLOSION_MARGIN = 30;
+	private final static float DURATION_OF_BARREL_EXPLOSION_IN_SECONDS = 1.5f;
+	
+	public void explodeMaybe(
+			final RenderTree theRenderTree,
+			Scene theScene
+			//ArrayList<DeadFrog> deadFrogs, 
+			//ArrayList<Frog> frogs, 
+			/*ArrayList<Barrel1> barrels, */ 
+			//ArrayList<Projectile> projectiles, 
+			//ArrayList<BarrelExplosion> barrelExplosions,
+			//widthOfScene,
+			//Vector2 positionOfExplosion
+	) {
+		
+//		theScene.deadFrogs, 
+//		theScene.frogs, 
+//		theScene.projectiles, 
+//		theScene.barrelExplosions,
+//		theScene.getW(),
+		if (
+				  (this.x > (0                      +EXPLOSION_MARGIN)) && //a droite de la marge gauche
+			      ( (this.x+this.width) < (theScene.getWidth()-EXPLOSION_MARGIN))/* &&*/ //a gauche de la marge droite
+			      //(this.y+this.height < (Gdx.graphics.getHeight()-EXPLOSION_MARGIN))&& //en bas de la marge haut 
+			      //(this.y > (0                       +EXPLOSION_MARGIN))   //en haut de la marge basse
+				){
+			System.out.println("BOOOOOUUUUUUM" + "(" + x + "," + y + ")");
+			
+			theRenderTree.killAllFrog(theScene.deadFrogs, theScene.frogs);
+			final BarrelExplosion splosion = new BarrelExplosion(new Vector2(this.x-24, this.y-24));
+			theScene.barrelExplosions.add(splosion);
+			
+			int barrelDestroyedIndex = 0;
+			while (barrelDestroyedIndex < theScene.projectiles.size()) {
+				if (theScene.projectiles.get(barrelDestroyedIndex).getName().startsWith("projectileBarrel1")) {
+					Barrel1 barrelDestroyed = (Barrel1)theScene.projectiles.get(barrelDestroyedIndex);
+					if (barrelDestroyed == null) {
+						barrelDestroyedIndex++;
+						continue;
+					}
+					theScene.projectiles.remove(barrelDestroyedIndex);
+					theRenderTree.getCurrentStage().removeActor(barrelDestroyed);
+				}
+				else {
+					barrelDestroyedIndex++;
+				}
+			}
+			
+			theRenderTree.getCurrentStage().addActor(splosion);
+			//splosion will disappear from the road
+			new java.util.Timer().schedule( 
+			        new java.util.TimerTask() {
+			            @Override
+			            public void run() {
+			                theRenderTree.getCurrentStage().removeActor(splosion);
+			            }
+			        }, 
+			        (long) (DURATION_OF_BARREL_EXPLOSION_IN_SECONDS*1000) 
+			);
+		} //end of if margins
+		else {
+			System.out.println("inside of margins"+ "(" + x + "," + y + ")");
+			System.out.println("second:" +(this.x+this.width) + "a gauche de " + Integer.toString(theScene.getWidth()-EXPLOSION_MARGIN)
+					+ Boolean.toString((this.x+this.width) < (theScene.getWidth()-EXPLOSION_MARGIN)));
+			    
+			System.out.println("first:" + this.x + "a droite de " + Integer.toString(0                      +EXPLOSION_MARGIN) + ":"
+					+ Boolean.toString(this.x > (0 +EXPLOSION_MARGIN)));
+		}
+			
+			
+			
+			
+	} //end of function
+}; //end of class
