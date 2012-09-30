@@ -32,9 +32,9 @@ public class Menu extends Activity {
     private OnClickListener clickForOptions = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent().setClass(getApplicationContext(),
-                    Options.class);
-			startActivity(intent);
+			//Intent intent = new Intent().setClass(getApplicationContext(),
+            //        Options.class);
+			//startActivity(intent);
 		}
     };
 	
