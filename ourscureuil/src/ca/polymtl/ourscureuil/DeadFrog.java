@@ -33,12 +33,10 @@ public class DeadFrog extends Node {
 	// y = 144
 	// w = 48
 	// h = 48
-	//static protected TextureRegion texreg = new TextureRegion(projectileTextureList, 96, 144, 48, 48);	
-	//static protected TextureRegion texregDead = new TextureRegion(projectileTextureList, 48, 144, 48, 48); //grenouille
-	//static protected TextureRegion texregDead = new TextureRegion(projectileTextureList, 72, 144, 48, 48); //grenouille demie
-	static protected TextureRegion texregDead = new TextureRegion(projectileTextureList, 96, 144, 48, 48); //grenouille morte 
 	
-	private float mTimeLeft = 6;
+	//static protected TextureRegion texregDead = new TextureRegion(projectileTextureList, 96, 144, 48, 48); //grenouille morte 
+	static protected TextureRegion texregDead = new TextureRegion(projectileTextureList, 144, 144, 48, 48); //car crash smoke
+	
 	
 	public void SetMovement(Vector2 movement) {
 		//dead frog does not move

@@ -105,7 +105,6 @@ public class RenderTree {
 		}
 	}
 	
-	
 	public boolean intersectionRoundRound(Vector2 c1, float r1 , Vector2 c2,  float r2)
 	{
 
@@ -118,7 +117,50 @@ public class RenderTree {
 
 	}
 	
-	private final float DURATION_OF_CADAVER_IN_SECONDS = 100f;
+	public boolean intersectionRectangleRectangle(Vector2 startPos1, float height1, float width1,
+													Vector2 startPos2, float height2, float width2) {
+		
+
+	     if ( startPos1.y        > startPos2.y &&
+	    	  startPos1.y        < startPos2.y+height2 &&// 1y basegauche est entre y2 hauteur 
+	          startPos1.x        < startPos2.x+width2 && 
+	          startPos1.x        > startPos2.x  // 1x basegauche est entre 2x largeur
+	        ) {
+	         return true;
+	     }
+	     if ( startPos1.y+height1 > startPos2.y &&
+	          startPos1.y+height1 < startPos2.y+height2 && // 1y hautgauche est entre 2y hauteur
+	          startPos1.x         < startPos2.x+width2 &&
+	          startPos1.x         > startPos2.x  // 1x hautgauche est entre 2x largeur
+	        ) {
+	         return true;
+	     }
+	     if ( startPos1.y+height1 > startPos2.y &&
+	          startPos1.y+height1 < startPos2.y+height2 && //1y hautdroite est entre 2y hauteur
+	          startPos1.x+width1  < startPos2.x+width2 &&
+	          startPos1.x+width1  > startPos2.x // 1x hautdroite est entre 2x largeur
+	        ) {
+	         return true;
+	     }
+	     if ( startPos1.y         < startPos2.y &&
+	          startPos1.y         > startPos2.y+height2 && // 1y basdroite est entre 2y hauteur
+	          startPos1.x+width1  < startPos2.x+width2 &&
+	          startPos1.x+width1  > startPos2.x //1x basdroite est entre 2x largeur 
+	        ){ 
+	         return true;
+	     }
+	     // may be necessary : if rect2 is entirely included in rect 1
+	     //if ( ) 
+	    //{
+	    		 
+	    //}
+	    	 
+	     return false;
+	 
+	}
+	
+	private final float DURATION_OF_CADAVER_IN_SECONDS = 1f;
+	private final float DURATION_OF_SMOKE_CLOUD_IN_SECONDS = 1f;
 	
 	private void killFrog(Node frogToKill, ArrayList<DeadFrog> deadFrogs, ArrayList<Frog> liveFrogs, int indexOfLifeFrog) {
 		final DeadFrog cadaver = new DeadFrog(new Vector2(frogToKill.x, frogToKill.y), "dead"+frogToKill.name);
@@ -137,6 +179,96 @@ public class RenderTree {
 		        }, 
 		        (long) (DURATION_OF_CADAVER_IN_SECONDS*1000) 
 		);
+	}
+
+	private void crashCars(Node firstProjectile, Node secondProjectile, ArrayList<CarCrashSmoke> carCrashSmokeClouds
+			, int firstProjectileIndex, int secondProjectileIndex, ArrayList<Projectile> projectiles) {
+		
+		final CarCrashSmoke smokeCloud = new CarCrashSmoke(new Vector2( (firstProjectile.x + secondProjectile.x)/2 , 
+				         ( firstProjectile.y+ secondProjectile.y)/2), "crashed"+firstProjectile.name);
+		carCrashSmokeClouds.add(smokeCloud);
+		
+		//if : precaution
+		if (firstProjectileIndex < secondProjectileIndex) {
+			projectiles.remove(secondProjectileIndex);
+			projectiles.remove(firstProjectileIndex);
+		}
+		else {
+			projectiles.remove(firstProjectileIndex);
+			projectiles.remove(secondProjectileIndex);
+		}
+		
+		this.getCurrentStage().addActor(smokeCloud);
+		this.getCurrentStage().removeActor(firstProjectile);
+		this.getCurrentStage().removeActor(secondProjectile);
+		
+		//cadaver will disappear from the road
+		new java.util.Timer().schedule( 
+		        new java.util.TimerTask() {
+		            @Override
+		            public void run() {
+		                getCurrentStage().removeActor(smokeCloud);
+		            }
+		        }, 
+		        (long) (DURATION_OF_SMOKE_CLOUD_IN_SECONDS*1000)
+		);
+		
+		
+		
+		
+	}
+	
+
+	public void reactCollisionProjectiles(ArrayList<Projectile> projectiles,
+			ArrayList<CarCrashSmoke> carCrashSmokeClouds) {
+		
+		int firstProjectileIndex=0;
+		while (firstProjectileIndex< projectiles.size() )
+		{
+			int secondProjectileIndex = firstProjectileIndex;
+			boolean collisionDetected = false;
+			while (secondProjectileIndex < projectiles.size() && !collisionDetected)
+			{
+				Node firstProjectile = projectiles.get(firstProjectileIndex);
+				Node secondProjectile = projectiles.get(secondProjectileIndex);
+				
+				//Vector2 c1 = new Vector2(firstProjectile.x+ firstProjectile.width/2, firstProjectile.y + firstProjectile.height/2);
+				//Vector2 c2 = new Vector2(secondProjectile.x+ secondProjectile.width/2, secondProjectile.y + secondProjectile.height/2);
+				
+				if(intersectionRectangleRectangle(new Vector2(firstProjectile.x, firstProjectile.y),
+						firstProjectile.height,
+						firstProjectile.width,
+						new Vector2(secondProjectile.x, secondProjectile.y),
+						secondProjectile.height,
+						secondProjectile.width) )
+				{
+					System.out.println("CRASSSHSHHH");
+					crashCars(firstProjectile, secondProjectile, carCrashSmokeClouds,
+							firstProjectileIndex, secondProjectileIndex, projectiles);
+					
+					
+					//i = 0; //so that if i was last
+					collisionDetected = true; // so that i is not used anymore, and reevaluated
+				
+					firstProjectileIndex = 0; //the projectile group was changed
+					secondProjectileIndex = 0;
+				}
+				else {
+					secondProjectileIndex++;
+				}
+				
+			}
+			
+			if (!collisionDetected) {
+				firstProjectileIndex++;
+			}
+			else {
+				//size of frogs has diminished
+			}
+			
+			
+		}
+		
 	}
 
 

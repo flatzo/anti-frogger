@@ -16,6 +16,8 @@ import ca.polymtl.ourscureuil.projectiles.Truck2;
 import ca.polymtl.ourscureuil.projectiles.Van1;
 import ca.polymtl.ourscureuil.projectiles.Van2;
 
+import ca.polymtl.ourscureuil.CarCrashSmoke;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -42,6 +44,8 @@ public class Scene {
 	public ArrayList<Frog> frogs = new ArrayList<Frog>();
 	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	public ArrayList<DeadFrog> deadFrogs = new ArrayList<DeadFrog>();
+	public ArrayList<Barrel1> barrels = new ArrayList<Barrel1>();
+	public ArrayList<CarCrashSmoke> carCrashSmokeClouds = new ArrayList<CarCrashSmoke>();
 	
 	
 	public Scene(int w,int h, RenderTree rt) {
